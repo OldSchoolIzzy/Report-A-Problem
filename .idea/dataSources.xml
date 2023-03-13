@@ -10,5 +10,12 @@
       <jdbc-url>jdbc:postgresql://3.12.60.167:5432/report-a-problem</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="report-a-problem" uuid="9c54b46a-d233-44f0-985c-d0d41e50b6e2">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://3.12.60.167:5432/postgres</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
