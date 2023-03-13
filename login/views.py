@@ -6,7 +6,11 @@ from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib import messages
 
+from django.contrib import messages
+
 from .forms import CreateUserForm
+
+from django.contrib.auth import authenticate,login,logout
 
 def registerPage(request):
     form= CreateUserForm()
@@ -15,8 +19,30 @@ def registerPage(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            user=form.cleaned_data.get('username')
+            messages.success(request, "Account was created for " + user )
+            return redirect('loginPage')
     context={'form':form}
     return render(request, 'register.html', context)
 def loginPage(request):
-    return render(request, 'login.html')
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+
+        user = authenticate(request,username=username, password=password)
+
+        if user is not None:
+            login(request,user)
+            return redirect('home')
+        else:
+            messages.info(request, "Username or Password is incorrect")
+
+
+    context={}
+    return render(request, 'login.html', context)
+def logoutUser(request):
+    logout(request)
+    return redirect('loginPage')
+def home(request):
+    context={}
+    return render(request, 'homepage.html',context)
