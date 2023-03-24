@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Triage Page {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="w3-bar w3-border w3-light-grey">
+        <a href="/triage" class="w3-bar-item w3-button">Home</a>
+        <a href="/create" class="w3-bar-item w3-button">Create Ticket</a>
+        <a href="/" class="w3-bar-item w3-button w3-green w3-right">Logout</a>
+    </div>
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+        <h3 class="w3-bar-item">Views</h3>
+        <a href="/triage" class="w3-bar-item w3-button"{% block style %} style="background-color: azure" {% endblock %} > Triage</a>
+        <a href="/pending" class="w3-bar-item w3-button" {% block style2 %}  {% endblock %}>Pending Tickets</a>
+        <a href="/unsolved" class="w3-bar-item w3-button" {% block style3 %}  {% endblock %}>Unsolved Tickets</a>
+        <a href="/solved" class="w3-bar-item w3-button" {% block style4 %}  {% endblock %}>Solved Tickets</a>
+    </div>
+    <!-- Page Content -->
+    <div style="margin-left:25%">
+        <div class="w3-container w3-teal">
+            {% block header %} <h1>Triage</h1> {% endblock %}
+        </div>
+        <div class="w3-container">
+        <h2>Tickets</h2>
+            <table class="w3-table w3-bordered">
+                <tr>
+                  <th>Subject</th>
+                  <th>Requester</th>
+                  <th>Requested</th>
+                </tr>
+                {% block rows %}
+                    <tr>
+                      <td>Leaking faucet</td>
+                      <td>John Smith</td>
+                      <td>10 minutes ago</td>
+                    </tr>
+                    <tr>
+                      <td>Paper towel stop working</td>
+                      <td>Rose Hernandez</td>
+                      <td>1 hour ago</td>
+                    </tr>
+                {% endblock %}
+            </table>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

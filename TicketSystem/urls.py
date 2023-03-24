@@ -1,0 +1,10 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('triage/', views.triage, name='triage'),
+    path('pending/', views.pending, name='pending'),
+    path('unsolved/', views.unsolved, name='unsolved'),
+    path('solved/', views.solved, name='solved'),
+    path('create/', views.create_ticket, name='create_ticket'),
+]

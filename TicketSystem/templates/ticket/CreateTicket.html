@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Ticket</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+        * {box-sizing: border-box;}
+
+        input[type=text], select, textarea {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+          margin-top: 6px;
+          margin-bottom: 16px;
+          resize: vertical;
+        }
+
+        input[type=submit] {
+          background-color: #04AA6D;
+          color: white;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+          background-color: #45a049;
+        }
+
+        .container {
+          border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<div class="w3-bar w3-border w3-light-grey">
+  <a href="/triage" class="w3-bar-item w3-button">Home</a>
+  <a href="/create" class="w3-bar-item w3-button">Create Ticket</a>
+  <a href="/" class="w3-bar-item w3-button w3-green w3-right">Logout</a>
+</div>
+<!-- Sidebar -->
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+
+    <h3 class="w3-bar-item">New Ticket</h3>
+
+    <label class="w3-text-black"><b>Requester</b></label>
+    <label>
+        <input class="w3-input w3-border" name="requester" type="text">
+    </label>
+
+    <label for="assignee">Choose an assignee:</label>
+      <select name="assignee" id="assignee">
+        <optgroup label="Maintenance">
+          <option value="bdylan">Bob Dylan</option>
+          <option value="dboyle">Dan Boyle</option>
+        </optgroup>
+        <optgroup label="Custodial">
+          <option value="ssmith">Sarah Smith</option>
+          <option value="jsmith">John Smith</option>
+        </optgroup>
+      </select>
+
+    <label>
+        <select class="w3-select" name="priority">
+              <option value="" disabled selected>Priority</option>
+              <option value="1">Low</option>
+              <option value="2">High</option>
+              <option value="3">Medium</option>
+        </select>
+    </label>
+
+    <label>
+        <select class="w3-select" name="building">
+              <option value="" disabled selected>Location</option>
+              <option value="1">Dunham</option>
+              <option value="2">Stephen</option>
+              <option value="3">STEM</option>
+        </select>
+    </label>
+</div>
+<!-- Page Content -->
+<div style="margin-left:25%">
+    <div class="w3-container w3-teal">
+        <h1>Create New Ticket</h1>
+    </div>
+
+    <div class="container">
+        <form action="">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Enter subject...">
+            <label for="note">Note</label>
+            <textarea id="note" name="note" placeholder="Write note..." style="height:200px"></textarea>
+            <select class="w3-select" name="option">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+<script>
+    function myDropFunc() {
+      var x = document.getElementById("demoDrop");
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-green";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace(" w3-green", "");
+      }
+    }
+    function myFunction() {
+      var x = document.getElementById("Demo");
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+</script>
+</body>
+</html>
