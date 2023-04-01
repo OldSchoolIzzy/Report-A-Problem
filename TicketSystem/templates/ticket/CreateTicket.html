@@ -46,74 +46,140 @@
 <div class="w3-bar w3-border w3-light-grey">
   <a href="/triage" class="w3-bar-item w3-button">Home</a>
   <a href="/create" class="w3-bar-item w3-button">Create Ticket</a>
-  <a href="/" class="w3-bar-item w3-button w3-green w3-right">Logout</a>
+  <a href="/login" class="w3-bar-item w3-button w3-green w3-right">Logout</a>
 </div>
-<!-- Sidebar -->
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
 
-    <h3 class="w3-bar-item">New Ticket</h3>
+{% if request.method == "POST"%}
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+        <h3 class="w3-bar-item">Ticket Details</h3>
+        <label class="w3-text-black"><b>Requester</b></label>
+        <label>
+            <input class="w3-input w3-border" name="requester" type="text" value="{{ requester }}">
+        </label>
+        <label for="assignee">Choose an assignee:</label>
+          <select name="assignee" id="assignee">
+            <optgroup label="Maintenance">
+              <option value="bdylan">Bob Dylan</option>
+              <option value="dboyle">Dan Boyle</option>
+            </optgroup>
+            <optgroup label="Custodial">
+              <option value="ssmith">Sarah Smith</option>
+              <option value="jsmith">John Smith</option>
+            </optgroup>
+          </select>
 
-    <label class="w3-text-black"><b>Requester</b></label>
-    <label>
-        <input class="w3-input w3-border" name="requester" type="text">
-    </label>
-
-    <label for="assignee">Choose an assignee:</label>
-      <select name="assignee" id="assignee">
-        <optgroup label="Maintenance">
-          <option value="bdylan">Bob Dylan</option>
-          <option value="dboyle">Dan Boyle</option>
-        </optgroup>
-        <optgroup label="Custodial">
-          <option value="ssmith">Sarah Smith</option>
-          <option value="jsmith">John Smith</option>
-        </optgroup>
-      </select>
-
-    <label>
-        <select class="w3-select" name="priority">
-              <option value="" disabled selected>Priority</option>
-              <option value="1">Low</option>
-              <option value="2">High</option>
-              <option value="3">Medium</option>
-        </select>
-    </label>
-
-    <label>
-        <select class="w3-select" name="building">
-              <option value="" disabled selected>Location</option>
-              <option value="1">Dunham</option>
-              <option value="2">Stephen</option>
-              <option value="3">STEM</option>
-        </select>
-    </label>
-</div>
-<!-- Page Content -->
-<div style="margin-left:25%">
-    <div class="w3-container w3-teal">
-        <h1>Create New Ticket</h1>
-    </div>
-
-    <div class="container">
-        <form action="">
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject" placeholder="Enter subject...">
-            <label for="note">Note</label>
-            <textarea id="note" name="note" placeholder="Write note..." style="height:200px"></textarea>
-            <select class="w3-select" name="option">
-                <option value="" disabled selected>Choose your option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+        <label>
+            <select class="w3-select" name="priority">
+                  <option value="" disabled selected>Priority</option>
+                  <option value="1">Low</option>
+                  <option value="2">High</option>
+                  <option value="3">Medium</option>
             </select>
-            <input type="submit" value="Submit">
-        </form>
+        </label>
+
+        <label>
+            <select class="w3-select" name="building">
+                  <option value="" disabled selected>Location</option>
+                  <option value="1">Dunham</option>
+                  <option value="2">Stephen</option>
+                  <option value="3">STEM</option>
+            </select>
+        </label>
     </div>
-</div>
+    <!-- Page Content -->
+    <div style="margin-left:25%">
+        <div class="w3-container w3-teal">
+            <h1>Ticket Details</h1>
+        </div>
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" value="{{ Subject }}">
+                <label for="note">Note</label>
+                <textarea id="note" name="note" placeholder="Write note..." style="height:200px"></textarea>
+                <label>
+                    <select class="w3-select" name="option">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="1">Solved</option>
+                        <option value="2">Pending</option>
+                    </select>
+                </label>
+                <input type="submit" value="Update">
+            </form>
+        </div>
+    </div>
+{% else %}
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+
+        <h3 class="w3-bar-item">New Ticket</h3>
+
+        <label class="w3-text-black"><b>Requester</b></label>
+        <label>
+            <input class="w3-input w3-border" name="requester" type="text">
+        </label>
+
+        <label for="assignee">Choose an assignee:</label>
+          <select name="assignee" id="assignee">
+            <optgroup label="Maintenance">
+              <option value="bdylan">Bob Dylan</option>
+              <option value="dboyle">Dan Boyle</option>
+            </optgroup>
+            <optgroup label="Custodial">
+              <option value="ssmith">Sarah Smith</option>
+              <option value="jsmith">John Smith</option>
+            </optgroup>
+          </select>
+
+        <label>
+            <select class="w3-select" name="priority">
+                  <option value="" disabled selected>Priority</option>
+                  <option value="1">Low</option>
+                  <option value="2">High</option>
+                  <option value="3">Medium</option>
+            </select>
+        </label>
+
+        <label>
+            <select class="w3-select" name="building">
+                  <option value="" disabled selected>Location</option>
+                  <option value="1">Dunham</option>
+                  <option value="2">Stephen</option>
+                  <option value="3">STEM</option>
+            </select>
+        </label>
+    </div>
+    <!-- Page Content -->
+    <div style="margin-left:25%">
+        <div class="w3-container w3-teal">
+            <h1>Create New Ticket</h1>
+        </div>
+        <div class="container">
+            <form action="">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="Enter subject...">
+                <label for="note">Note</label>
+                <textarea id="note" name="note" placeholder="Write note..." style="height:200px"></textarea>
+                <label>
+                    <select class="w3-select" name="option">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="1">Solved</option>
+                        <option value="2">Pending</option>
+                    </select>
+                </label>
+                <input type="submit" value="Update">
+            </form>
+        </div>
+    </div>
+{% endif %}
+
 <script>
     function myDropFunc() {
       var x = document.getElementById("demoDrop");
-      if (x.className.indexOf("w3-show") == -1) {
+
+      if (x.className.indexOf("w3-show") === -1) {
         x.className += " w3-show";
         x.previousElementSibling.className += " w3-green";
       } else {
@@ -124,7 +190,8 @@
     }
     function myFunction() {
       var x = document.getElementById("Demo");
-      if (x.className.indexOf("w3-show") == -1) {
+
+      if (x.className.indexOf("w3-show") === -1) {
         x.className += " w3-show";
       } else {
         x.className = x.className.replace(" w3-show", "");
