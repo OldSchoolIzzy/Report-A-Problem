@@ -2,15 +2,8 @@ from django.shortcuts import render
 
 
 def triage(request):
-    if request.method == "POST":
-        context = {
-            'requester': 'Israel Herrera',
-            'Subject': 'My sink ran away',
-            'request': request,
-        }
-        return render(request, 'ticket/CreateTicket.html', context)
-    else:
-        return render(request, 'triage/master.html')
+    # load newly create tickets in the database here
+    return render(request, 'triage/master.html')
 
 
 def pending(request):
@@ -49,6 +42,38 @@ def solved(request):
         return render(request, 'triage/solved.html')
 
 
-def create_ticket(request):
+def open_ticket(request):
+    if request.method == "POST":
+        context = {
+            'requester': 'Israel Herrera',
+            'Subject': 'My sink ran away',
+            'request': request,
+        }
+        return render(request, 'ticket/CreateTicket.html', context)
     if request.method == "GET":
+        return render(request, 'triage/open.html')
+
+
+def create_ticket(request):
+    if request.method == "POST":
+        context = {
+            'requester': 'Israel Herrera',
+            'Subject': 'My sink ran away',
+            'request': request,
+        }
+        return render(request, 'triage/master.html')
+    else:
         return render(request, 'ticket/CreateTicket.html')
+
+
+def view_ticket(request):
+    if request.method == 'GET':
+        context = {
+            'requester': 'Israel Herrera',
+            'Subject': 'My sink ran away',
+            'request': request,
+        }
+        return render(request, 'ticket/viewTicket.html', context)
+    if request.method == 'UPDATE':
+        # Update the ticket in the database
+        return
