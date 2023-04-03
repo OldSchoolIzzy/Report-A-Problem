@@ -7,4 +7,6 @@ urlpatterns = [
     path('unsolved/', views.unsolved, name='unsolved'),
     path('solved/', views.solved, name='solved'),
     path('create/', views.create_ticket, name='create_ticket'),
+    path('open/', views.open_ticket, name='open_ticket'),
+    path('viewTicket/', views.view_ticket, name='view_ticket'),
 ]

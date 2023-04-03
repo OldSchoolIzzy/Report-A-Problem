@@ -20,6 +20,7 @@
         <a href="/pending" class="w3-bar-item w3-button" {% block style2 %}  {% endblock %}>Pending Tickets</a>
         <a href="/unsolved" class="w3-bar-item w3-button" {% block style3 %}  {% endblock %}>Unsolved Tickets</a>
         <a href="/solved" class="w3-bar-item w3-button" {% block style4 %}  {% endblock %}>Solved Tickets</a>
+        <a href="/open" class="w3-bar-item w3-button" {% block style5 %}  {% endblock %}>Open Tickets</a>
     </div>
     <!-- Page Content -->
     <div style="margin-left:25%">
@@ -34,7 +35,7 @@
                   <th>Requester</th>
                   <th>Requested</th>
                 </tr>
-            <form method="post">
+            <form method="GET" action="http://127.0.0.1:8000/viewTicket/">
                 {% csrf_token %}
                 {% block rows %}
                     <tr>
