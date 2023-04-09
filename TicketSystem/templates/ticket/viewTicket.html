@@ -62,8 +62,30 @@
                 {% csrf_token %}
                 <label for="subject">Subject</label>
                 <input type="text" id="subject" name="subject" value="{{ Subject }}">
-                <label for="note">Note</label>
-                <textarea id="note" name="note" placeholder="Write note..." style="height:200px"></textarea>
+
+                <div class="w3-container">
+                    <div class="w3-bar w3-teal">
+                      <span class="w3-bar-item w3-button tablink w3-grey" onclick="openCity(event, 'London')">Note</span>
+                      <span class="w3-bar-item w3-button tablink" onclick="openCity(event, 'Paris')">Internal Notes</span>
+                      <span class="w3-bar-item w3-button tablink" onclick="openCity(event, 'Tokyo')">Other</span>
+                    </div>
+
+                    <div id="London" class="w3-container city">
+                        <label for="note">Note from requester</label>
+                        <textarea id="note" name="note" placeholder="Write note..." style="height:100px"></textarea>
+                    </div>
+
+                    <div id="Paris" class="w3-container city" style="display:none">
+                        <label for="note">Internal notes</label>
+                        <textarea id="note" name="note" placeholder="Write internal note..." style="height:100px"></textarea>
+                        <p> list of internal notes placed in here</p>
+                    </div>
+
+                    <div id="Tokyo" class="w3-container city" style="display:none">
+                      <h2>Tokyo</h2>
+                      <p>Tokyo is the capital of Japan.</p>
+                    </div>
+                </div>
                 <label>
                     <select class="w3-select" name="option">
                         <option value="" disabled selected>Choose your option</option>
@@ -90,6 +112,7 @@
         x.previousElementSibling.className.replace(" w3-green", "");
       }
     }
+
     function myFunction() {
       var x = document.getElementById("Demo");
 
@@ -98,6 +121,20 @@
       } else {
         x.className = x.className.replace(" w3-show", "");
       }
+    }
+
+    function openCity(evt, cityName) {
+      var i, x, tablinks;
+      x = document.getElementsByClassName("city");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" w3-grey", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " w3-grey";
     }
 </script>
 </body>
