@@ -1,8 +1,9 @@
 from django.urls import path
 from . import views
 
+# /triage/action/id
 urlpatterns = [
-    path('triage/', views.triage, name='triage'),
+    path('', views.triage, name='triage'),
     path('pending/', views.pending, name='pending'),
     path('unsolved/', views.unsolved, name='unsolved'),
     path('solved/', views.solved, name='solved'),

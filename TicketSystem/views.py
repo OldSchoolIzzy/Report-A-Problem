@@ -72,6 +72,7 @@ def view_ticket(request):
             'requester': 'Israel Herrera',
             'Subject': 'My sink ran away',
             'request': request,
+            'requestNote': 'I have no idea what i am doing'
         }
         return render(request, 'ticket/viewTicket.html', context)
     if request.method == 'UPDATE':
