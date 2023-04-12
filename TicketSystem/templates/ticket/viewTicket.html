@@ -58,34 +58,33 @@
             <h1>Ticket Details</h1>
         </div>
         <div class="container">
-            <form method="">
+            <form method="POST">
                 {% csrf_token %}
+
                 <label for="subject">Subject</label>
                 <input type="text" id="subject" name="subject" value="{{ Subject }}">
 
-                <div class="w3-container">
-                    <div class="w3-bar w3-teal">
-                      <span class="w3-bar-item w3-button tablink w3-grey" onclick="openCity(event, 'London')">Note</span>
-                      <span class="w3-bar-item w3-button tablink" onclick="openCity(event, 'Paris')">Internal Notes</span>
-                      <span class="w3-bar-item w3-button tablink" onclick="openCity(event, 'Tokyo')">Other</span>
-                    </div>
+                {% comment %} event is deprecated so might need to update this in the future {% endcomment %}
+                <div class="w3-bar w3-teal">
+                  <span class="w3-bar-item w3-button tablink w3-grey" onclick="openCity(event, 'RequesterNote')">Requester Note</span>
+                  <span class="w3-bar-item w3-button tablink" onclick="openCity(event, 'InternalNote')">Internal Notes</span>
+                  <span class="w3-bar-item w3-button tablink" onclick="openCity(event, 'Other')">Other</span>
+                </div>
 
-                    <div id="London" class="w3-container city">
-                        <label for="note">Note from requester</label>
-                        <textarea id="note" name="note" placeholder="Write note..." style="height:100px"></textarea>
-                    </div>
-
-                    <div id="Paris" class="w3-container city" style="display:none">
-                        <label for="note">Internal notes</label>
-                        <textarea id="note" name="note" placeholder="Write internal note..." style="height:100px"></textarea>
-                        <p> list of internal notes placed in here</p>
-                    </div>
-
-                    <div id="Tokyo" class="w3-container city" style="display:none">
-                      <h2>Tokyo</h2>
-                      <p>Tokyo is the capital of Japan.</p>
+                <div id="RequesterNote" class="w3-container tab">
+                    <div class="w3-panel w3-border" style="background-color: white">
+                        <p>{{ requestNote }}</p>
                     </div>
                 </div>
+                <div id="InternalNote" class="w3-container tab" style="display:none">
+                    <label for="InternalNote"></label>
+                    <textarea id="InternalNote" name="InternalNote" placeholder="Write internal note..." style="height:100px"></textarea>
+                    <p> internal notes list go here</p>
+                </div>
+                <div id="Other" class="w3-container tab" style="display:none">
+                  <p>I have no idea what this is..... oof.</p>
+                </div>
+
                 <label>
                     <select class="w3-select" name="option">
                         <option value="" disabled selected>Choose your option</option>
@@ -123,9 +122,9 @@
       }
     }
 
-    function openCity(evt, cityName) {
+    function openCity(evt, name) {
       var i, x, tablinks;
-      x = document.getElementsByClassName("city");
+      x = document.getElementsByClassName("tab");
       for (i = 0; i < x.length; i++) {
         x[i].style.display = "none";
       }
@@ -133,7 +132,7 @@
       for (i = 0; i < x.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" w3-grey", "");
       }
-      document.getElementById(cityName).style.display = "block";
+      document.getElementById(name).style.display = "block";
       evt.currentTarget.className += " w3-grey";
     }
 </script>
