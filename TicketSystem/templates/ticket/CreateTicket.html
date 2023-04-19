@@ -15,9 +15,9 @@
 <body>
 <!-- Navbar -->
 <div class="w3-bar w3-border w3-light-grey">
-  <a href="/triage" class="w3-bar-item w3-button">Home</a>
-  <a href="/create" class="w3-bar-item w3-button">Create Ticket</a>
-  <a href="/login" class="w3-bar-item w3-button w3-green w3-right">Logout</a>
+  <a href="{% url 'triage' %}" class="w3-bar-item w3-button">Home</a>
+  <a href="{% url 'create_ticket' %}" class="w3-bar-item w3-button">Create Ticket</a>
+  <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-green w3-right">Logout</a>
 </div>
 
 {% if request.method == "POST"%}
@@ -130,7 +130,7 @@
             <h1>Create New Ticket</h1>
         </div>
         <div class="container">
-            <form method="post">
+            <form method="post" action="{% url 'create_ticktet_post{{ id }}' %}">
              {% csrf_token %}
                 <label for="subject">Subject</label>
                 <input type="text" id="subject" name="subject" placeholder="Enter subject...">

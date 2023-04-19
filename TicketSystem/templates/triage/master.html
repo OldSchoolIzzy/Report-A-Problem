@@ -12,18 +12,18 @@
 <body>
     <!-- Navbar -->
     <div class="w3-bar w3-border w3-light-grey">
-        <a href="/triage" class="w3-bar-item w3-button">Home</a>
-        <a href="/create" class="w3-bar-item w3-button">Create Ticket</a>
-        <a href="/login" class="w3-bar-item w3-button w3-teal w3-right">Logout</a>
+        <a href="{% url 'triage' %}" class="w3-bar-item w3-button">Home</a>
+        <a href="{% url 'create_ticket' %}" class="w3-bar-item w3-button">Create Ticket</a>
+        <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-teal w3-right">Logout</a>
     </div>
     <!-- Sidebar -->
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
         <h3 class="w3-bar-item">Views</h3>
-        <a href="" class="w3-bar-item w3-button"{% block style %} style="background-color: azure" {% endblock %} > Triage</a>
-        <a href="pending/" class="w3-bar-item w3-button" {% block style2 %}  {% endblock %}>Pending Tickets</a>
-        <a href="unsolved/" class="w3-bar-item w3-button" {% block style3 %}  {% endblock %}>Unsolved Tickets</a>
-        <a href="solved/" class="w3-bar-item w3-button" {% block style4 %}  {% endblock %}>Solved Tickets</a>
-        <a href="open/" class="w3-bar-item w3-button" {% block style5 %}  {% endblock %}>Open Tickets</a>
+        <a href="{% url 'triage' %}" class="w3-bar-item w3-button"{% block style %} style="background-color: azure" {% endblock %} > Triage</a>
+        <a href="{% url 'pending' %}" class="w3-bar-item w3-button" {% block style2 %}  {% endblock %}>Pending Tickets</a>
+        <a href="{% url 'unsolved' %}" class="w3-bar-item w3-button" {% block style3 %}  {% endblock %}>Unsolved Tickets</a>
+        <a href="{% url 'solved' %}" class="w3-bar-item w3-button" {% block style4 %}  {% endblock %}>Solved Tickets</a>
+        <a href="{% url 'open_ticket' %}" class="w3-bar-item w3-button" {% block style5 %}  {% endblock %}>Open Tickets</a>
     </div>
     <!-- Page Content -->
     <div style="margin-left:25%">
