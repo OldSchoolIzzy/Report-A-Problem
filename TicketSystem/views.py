@@ -66,6 +66,16 @@ def create_ticket(request):
         return render(request, 'ticket/CreateTicket.html')
 
 
+def create_ticket_post(request, id):
+    if request.method == "POST":
+        context = {
+            'requester': 'Israel Herrera',
+            'Subject': 'My sink ran away',
+            'request': request,
+        }
+        return render(request, 'triage/master.html')
+
+
 def view_ticket(request):
     if request.method == 'GET':
         context = {
@@ -78,3 +88,14 @@ def view_ticket(request):
     if request.method == 'UPDATE':
         # Update the ticket in the database
         return
+
+
+def update_ticket(request, id):
+    if request.method == 'POST':
+        context = {
+            'requester': 'Israel Herrera',
+            'Subject': 'My sink ran away',
+            'request': request,
+            'requestNote': 'I have no idea what i am doing'
+        }
+        return render(request, 'triage/master.html', context)

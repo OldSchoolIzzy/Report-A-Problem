@@ -11,9 +11,9 @@
 <body>
 <!-- Navbar -->
 <div class="w3-bar w3-border w3-light-grey">
-  <a href="/triage" class="w3-bar-item w3-button">Home</a>
-  <a href="/create" class="w3-bar-item w3-button">Create Ticket</a>
-  <a href="/login" class="w3-bar-item w3-button w3-green w3-right">Logout</a>
+  <a href="{% url 'triage' %}" class="w3-bar-item w3-button">Home</a>
+  <a href="{% url 'create_ticket' %}" class="w3-bar-item w3-button">Create Ticket</a>
+  <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-green w3-right">Logout</a>
 </div>
     <!-- Sidebar -->
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
@@ -58,7 +58,7 @@
             <h1>Ticket Details</h1>
         </div>
         <div class="container">
-            <form method="POST">
+            <form method="POST" action="{% url 'update_ticket({{ id }})' %}">
                 {% csrf_token %}
 
                 <label for="subject">Subject</label>
