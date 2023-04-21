@@ -11,10 +11,10 @@
 </head>
 <body>
     <!-- Navbar -->
-    <div class="w3-bar w3-border w3-light-grey">
-        <a href="{% url 'triage' %}" class="w3-bar-item w3-button">Home</a>
-        <a href="{% url 'create_ticket' %}" class="w3-bar-item w3-button">Create Ticket</a>
-        <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-teal w3-right">Logout</a>
+    <div class="w3-bar w3-border w3-light-white">
+        <a href="{% url 'triage' %}" class="w3-bar-item w3-button" style="color: #00467F">Home</a>
+        <a href="{% url 'create_ticket' %}" class="w3-bar-item w3-button" style="color: #00467F">Create Ticket</a>
+        <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-right w3-text-white" style="background-color: #00467F">Logout</a>
     </div>
     <!-- Sidebar -->
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
@@ -27,8 +27,8 @@
     </div>
     <!-- Page Content -->
     <div style="margin-left:25%">
-        <div class="w3-container w3-teal">
-            {% block header %} <h1>Triage</h1> {% endblock %}
+        <div class="w3-container " style="background-color: #00467F">
+            {% block header %} <h1 style="color: white">Triage</h1> {% endblock %}
         </div>
         <div class="container">
         <h2>Tickets</h2>
