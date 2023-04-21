@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../static/css/createTicket.css">
+</head>
+<body>
+<!-- Navbar -->
+<div class="w3-bar w3-border w3-light-grey">
+  <a href="{% url 'triage' %}" class="w3-bar-item w3-button">Home</a>
+  <a href="{% url 'create_ticket' %}" class="w3-bar-item w3-button">Create Ticket</a>
+  <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-green w3-right">Logout</a>
+</div>
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+        <h3 class="w3-bar-item">Ticket Details</h3>
+        <label class="w3-text-black"><b>Requester</b></label>
+        <label>
+            <input class="w3-input w3-border" name="requester" type="text" value="{{ requester }}">
+        </label>
+        <label for="assignee">Choose an assignee:</label>
+          <select name="assignee" id="assignee">
+            <optgroup label="Maintenance">
+              <option value="bdylan">Bob Dylan</option>
+              <option value="dboyle">Dan Boyle</option>
+            </optgroup>
+            <optgroup label="Custodial">
+              <option value="ssmith">Sarah Smith</option>
+              <option value="jsmith">John Smith</option>
+            </optgroup>
+          </select>
+
+        <label>
+            <select class="w3-select" name="priority">
+                  <option value="" disabled selected>Priority</option>
+                  <option value="1">Low</option>
+                  <option value="2">High</option>
+                  <option value="3">Medium</option>
+            </select>
+        </label>
+
+        <label>
+            <select class="w3-select" name="building">
+                  <option value="" disabled selected>Location</option>
+                  <option value="1">Dunham Hall</option>
+                  <option value="2">Stephens Hall</option>
+                  <option value="3">John C. Dunham Hall</option>
+            </select>
+        </label>
+    </div>
+    <!-- Page Content -->
+    <div style="margin-left:25%">
+        <div class="w3-container w3-teal">
+            <h1>Ticket Details</h1>
+        </div>
+        <div class="container">
+            <form method="POST" action="{% url 'update_ticket({{ id }})' %}">
+                {% csrf_token %}
+
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" value="{{ Subject }}">
+
+                {% comment %} event is deprecated so might need to update this in the future {% endcomment %}
+                <div class="w3-bar w3-teal">
+                  <span class="w3-bar-item w3-button tablink w3-grey" onclick="openCity(event, 'RequesterNote')">Requester Note</span>
+                  <span class="w3-bar-item w3-button tablink" onclick="openCity(event, 'InternalNote')">Internal Notes</span>
+                  <span class="w3-bar-item w3-button tablink" onclick="openCity(event, 'Other')">Other</span>
+                </div>
+
+                <div id="RequesterNote" class="w3-container tab">
+                    <div class="w3-panel w3-border" style="background-color: white">
+                        <p>{{ requestNote }}</p>
+                    </div>
+                </div>
+                <div id="InternalNote" class="w3-container tab" style="display:none">
+                    <label for="InternalNote"></label>
+                    <textarea id="InternalNote" name="InternalNote" placeholder="Write internal note..." style="height:100px"></textarea>
+                    <p> internal notes list go here</p>
+                </div>
+                <div id="Other" class="w3-container tab" style="display:none">
+                  <p>I have no idea what this is..... oof.</p>
+                </div>
+
+                <label>
+                    <select class="w3-select" name="option">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="1">Solved</option>
+                        <option value="2">Pending</option>
+                        <option value="2">Unsolved</option>
+                        <option value="2">Open</option>
+                    </select>
+                </label>
+                <input type="submit" value="Update">
+            </form>
+        </div>
+    </div>
+<script>
+    function myDropFunc() {
+      var x = document.getElementById("demoDrop");
+
+      if (x.className.indexOf("w3-show") === -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-green";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+        x.previousElementSibling.className =
+        x.previousElementSibling.className.replace(" w3-green", "");
+      }
+    }
+
+    function myFunction() {
+      var x = document.getElementById("Demo");
+
+      if (x.className.indexOf("w3-show") === -1) {
+        x.className += " w3-show";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+
+    function openCity(evt, name) {
+      var i, x, tablinks;
+      x = document.getElementsByClassName("tab");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" w3-grey", "");
+      }
+      document.getElementById(name).style.display = "block";
+      evt.currentTarget.className += " w3-grey";
+    }
+</script>
+</body>
+</html>
