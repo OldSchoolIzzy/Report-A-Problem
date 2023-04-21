@@ -64,6 +64,7 @@
 		}
 
 
+
 </style>
 <body>
 	<div class="container h-100">
@@ -100,10 +101,20 @@
 							</div>
 							   {{ form.password2 }}
 						</div>
-
+                        <div class="input-group mb-2">
+                            <div class="input-group-append">
+                                <div class="form-check">
+                                   <div class="container">
+                                       {{ form.type }}
+                                    </label>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
 				   		<div class="d-flex justify-content-center mt-3 login_container">
 				 			<input class="btn login_btn" type="submit" value="Register Account">
 				   		</div>
+
 					</form>
 				</div>
                 {{ form.errors }}
