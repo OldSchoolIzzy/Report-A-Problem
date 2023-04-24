@@ -1,4 +1,4 @@
-import uuid
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -27,14 +27,14 @@ class Ticket(models.Model):
     ]
 
     subject = models.TextField(max_length=255)
-    # username = models.ForeignKey('Member', on_delete=models.SET_NULL, null=True)
+    username = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     dateCreated = models.DateTimeField(auto_now_add=True)
     priority = models.CharField(max_length=15, default=LOW)
     buildingName = models.CharField(max_length=25)
     status = models.CharField(max_length=15, choices=STATUS_TYPES, default=UNSOLVED)
     description = models.TextField(max_length=255)
     problemType = models.CharField(max_length=15, choices=PROBLEM_TYPES)
-    image = models.ImageField(upload_to='', storage=None, max_length=100)
+    image = models.ImageField(upload_to='', storage=None, max_length=100, blank=True)
 
     def __str__(self):
-        return f'{self.id} ({self.dateCreated})'
+        return f'Ticket id: {self.id} Status: {self.status}'

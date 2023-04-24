@@ -7,12 +7,14 @@
 {% block header %} <h1 style="color: white"> Solved </h1> {% endblock %}
 
 {% block rows %}
-    <tr>
-        <td>3</td>
-        <td>Broken door handle</td>
-        <td>Bob smith</td>
-        <td>1 day ago</td>
-    </tr>
+    {% for ticket in tickets %}
+        <tr>
+            <td>{{ ticket.id }}</td>
+            <td>{{ ticket.subject }}</td>
+            <td>{{ ticket.username }}</td>
+            <td>{{ ticket.dateCreated }}</td>
+        </tr>
+    {% endfor %}
 {% endblock %}
 
 {% block style %} {% endblock %}

@@ -15,9 +15,9 @@
 <body>
 <!-- Navbar -->
 <div class="w3-bar w3-border w3-light-grey">
-  <a href="{% url 'triage' %}" class="w3-bar-item w3-button">Home</a>
-  <a href="{% url 'create_ticket' %}" class="w3-bar-item w3-button">Create Ticket</a>
-  <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-green w3-right">Logout</a>
+  <a href="{% url 'triage' %}" class="w3-bar-item w3-button" style="color: #00467F">Home</a>
+  <a href="{% url 'create_ticket' %}" class="w3-bar-item w3-button" style="color: #00467F">Create Ticket</a>
+  <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-right w3-text-white" style="background-color: #00467F">Logout</a>
 </div>
 
 {% if request.method == "POST"%}
@@ -126,11 +126,11 @@
     </div>
     <!-- Page Content -->
     <div style="margin-left:25%">
-        <div class="w3-container w3-teal">
+        <div class="w3-container w3-text-white" style="background-color: #00467F">
             <h1>Create New Ticket</h1>
         </div>
         <div class="container">
-            <form method="post" action="{% url 'create_ticktet_post{{ id }}' %}">
+            <form method="post" action="">
              {% csrf_token %}
                 <label for="subject">Subject</label>
                 <input type="text" id="subject" name="subject" placeholder="Enter subject...">
@@ -145,7 +145,7 @@
                         <option value="2">Open</option>
                     </select>
                 </label>
-                <input type="submit" value="Update">
+                <input type="submit" value="Update" class="w3-white">
             </form>
         </div>
     </div>
