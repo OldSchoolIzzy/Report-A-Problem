@@ -58,7 +58,7 @@
             <h1>Ticket Details</h1>
         </div>
         <div class="container">
-            <form method="POST" action="{% url 'update_ticket({{ id }})' %}">
+            <form method="POST" action="">
                 {% csrf_token %}
 
                 <label for="subject">Subject</label>
