@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <title>{% block title %}Triage Page {% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://www.w3schools.com/lib/w3.js"></script>
-
 </head>
 <body>
     <!-- Navbar -->
@@ -45,19 +43,14 @@
                 {% csrf_token %}
                 {% block rows %}
                     <tbody>
+                    {% for ticket in tickets %}
                         <tr class="item" onclick="window.location='viewTicket/'" >
-                            <td>6666666</td>
-                            <td>Leaking faucet</td>
-                            <td>John Smith</td>
-                            <td>10 minutes ago</td>
+                            <td>{{ ticket.id }}</td>
+                            <td>{{ ticket.subject }}</td>
+                            <td>{{ ticket.username}}</td>
+                            <td>{{ ticket.dateCreated }}</td>
                         </tr>
-                        <tr class="item" onclick="window.location='viewTicket/'">
-                            <td>99999999</td>
-                            <td>Paper towel stop working</td>
-                            <td>Rose Hernandez</td>
-                            <td>1 hour ago</td>
-                        </tr>
-
+                    {% endfor %}
                     </tbody>
                 {% endblock %}
             </form>

@@ -1,21 +1,19 @@
 from django.shortcuts import render
+from .models import Ticket
 
 
 def triage(request):
-    # load newly create tickets in the database here
-    return render(request, 'triage/master.html')
+    tickets = Ticket.objects.all()
+
+    return render(request, 'triage/master.html', {'tickets': tickets})
 
 
 def pending(request):
     if request.method == "POST":
-        context = {
-            'requester': 'Israel Herrera',
-            'Subject': 'My sink ran away',
-            'request': request,
-        }
-        return render(request, 'ticket/CreateTicket.html', context)
+        return render(request, 'ticket/CreateTicket.html')
     if request.method == "GET":
-        return render(request, 'triage/pending.html')
+        pending_tickets = Ticket.objects.filter(status='P')
+        return render(request, 'triage/pending.html', {'tickets': pending_tickets})
 
 
 def unsolved(request):
@@ -27,7 +25,8 @@ def unsolved(request):
         }
         return render(request, 'ticket/CreateTicket.html', context)
     if request.method == "GET":
-        return render(request, 'triage/unsolved.html')
+        unsolved_tickets = Ticket.objects.filter(status='U')
+        return render(request, 'triage/unsolved.html', {'tickets': unsolved_tickets})
 
 
 def solved(request):
@@ -39,7 +38,8 @@ def solved(request):
         }
         return render(request, 'ticket/CreateTicket.html', context)
     if request.method == "GET":
-        return render(request, 'triage/solved.html')
+        solved_tickets = Ticket.objects.filter(status='S')
+        return render(request, 'triage/solved.html', {'tickets': solved_tickets})
 
 
 def open_ticket(request):
@@ -51,7 +51,8 @@ def open_ticket(request):
         }
         return render(request, 'ticket/CreateTicket.html', context)
     if request.method == "GET":
-        return render(request, 'triage/open.html')
+        open_tickets = Ticket.objects.filter(status='O')
+        return render(request, 'triage/open.html', {'tickets': open_tickets})
 
 
 def create_ticket(request):
