@@ -39,12 +39,10 @@
                     <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(4)')" style="cursor:pointer">Requested</th>
                 </tr>
             </thead>
-            <form method="GET" action="http://127.0.0.1:8000/viewTicket/">
-                {% csrf_token %}
                 {% block rows %}
                     <tbody>
                     {% for ticket in tickets %}
-                        <tr class="item" onclick="window.location='viewTicket/'" >
+                        <tr class="item" onclick="window.location='viewTicket/{{ ticket.id }}'">
                             <td>{{ ticket.id }}</td>
                             <td>{{ ticket.subject }}</td>
                             <td>{{ ticket.username}}</td>
@@ -53,7 +51,6 @@
                     {% endfor %}
                     </tbody>
                 {% endblock %}
-            </form>
             </table>
         </div>
         {% block content %}
