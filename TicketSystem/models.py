@@ -34,7 +34,7 @@ class Ticket(models.Model):
     status = models.CharField(max_length=15, choices=STATUS_TYPES, default=UNSOLVED)
     description = models.TextField(max_length=255)
     problemType = models.CharField(max_length=15, choices=PROBLEM_TYPES)
-    image = models.ImageField(upload_to='', storage=None, max_length=100, blank=True)
+    image = models.ImageField(upload_to='static/img', storage=None, max_length=100, blank=True)
 
     def __str__(self):
         return f'Ticket id: {self.id} Status: {self.status}'
