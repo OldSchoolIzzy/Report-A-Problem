@@ -59,8 +59,10 @@ def view_ticket(request, ticket_id):
     if request.method == 'POST':
         # update ticket in the database
         return
-    ticket = Ticket.objects.filter(id=ticket_id)
-    return render(request, 'ticket/viewTicket.html', {'ticket': ticket})
+    ticket = Ticket.objects.get(id=ticket_id)
+
+    print(ticket)
+    return render(request, 'ticket/viewTicket.html', {'ticket': ticket, 'options': ticket.STATUS_TYPES})
 
 
 def update_ticket(request, id):
