@@ -8,7 +8,7 @@ class Ticket(models.Model):
     MEDIUM = "M"
     HIGH = "H"
 
-    PROBLEM_TYPES = [
+    PRIORITY_TYPES = [
         (LOW, 'Low'),
         (MEDIUM, 'Medium'),
         (HIGH, 'High')
@@ -29,12 +29,12 @@ class Ticket(models.Model):
     subject = models.TextField(max_length=255)
     username = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     dateCreated = models.DateTimeField(auto_now_add=True)
-    priority = models.CharField(max_length=15, default=LOW)
+    priority = models.CharField(max_length=15, choices=PRIORITY_TYPES)
     buildingName = models.CharField(max_length=25)
     status = models.CharField(max_length=15, choices=STATUS_TYPES, default=UNSOLVED)
     description = models.TextField(max_length=255)
-    problemType = models.CharField(max_length=15, choices=PROBLEM_TYPES)
-    image = models.ImageField(upload_to='static/img', storage=None, max_length=100, blank=True)
+    # problemType = models.CharField(max_length=15, choices=PROBLEM_TYPES)
+    # image = models.ImageField(upload_to='static/img', storage=None, max_length=100, blank=True)
 
     def __str__(self):
         return f'Ticket id: {self.id} Status: {self.status}'
