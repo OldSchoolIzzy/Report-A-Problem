@@ -28,7 +28,7 @@ def registerPage(request):
             type = form.cleaned_data.get('type')
             messages.success(request, "Account was created for " + username)
             user = User.objects.get(username=username)
-            user_data = userRole.objects.create(user=user, userRole=type)
+            user_data = userRole.objects.create(user=user, roleStatus=type)
             user_data.save()
             return redirect('login')
     context = {'form': form}
@@ -39,13 +39,18 @@ def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         user = authenticate(request, username=username, password=password)
+        suser = User.objects.get(username=username)
+        roleID = userRole.objects.filter(user_id=suser.id).values().last()
 
         if user is not None:
             login(request, user)
             return redirect('home')
+        elif user is not None:
+            login(request, user)
+            return redirect('/triage')
         else:
+            messages.info(request, roleID)
             messages.info(request, "Username or Password is incorrect")
 
     context = {}

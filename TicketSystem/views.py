@@ -1,13 +1,16 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Ticket
 
 
+@login_required(login_url='/login')
 def triage(request):
     tickets = Ticket.objects.all()
 
     return render(request, 'triage/master.html', {'tickets': tickets})
 
 
+@login_required(login_url='/login')
 def pending(request):
     if request.method == "POST":
         return render(request, 'ticket/CreateTicket.html')
@@ -16,6 +19,7 @@ def pending(request):
         return render(request, 'triage/pending.html', {'tickets': pending_tickets})
 
 
+@login_required(login_url='/login')
 def unsolved(request):
     if request.method == "POST":
         context = {
@@ -29,6 +33,7 @@ def unsolved(request):
         return render(request, 'triage/unsolved.html', {'tickets': unsolved_tickets})
 
 
+@login_required(login_url='/login')
 def solved(request):
     if request.method == "POST":
         context = {
@@ -42,6 +47,7 @@ def solved(request):
         return render(request, 'triage/solved.html', {'tickets': solved_tickets})
 
 
+@login_required(login_url='/login')
 def open_ticket(request):
     if request.method == "POST":
         context = {
@@ -55,6 +61,7 @@ def open_ticket(request):
         return render(request, 'triage/open.html', {'tickets': open_tickets})
 
 
+@login_required(login_url='/login')
 def create_ticket(request):
     if request.method == "POST":
         context = {
@@ -67,6 +74,7 @@ def create_ticket(request):
         return render(request, 'ticket/CreateTicket.html')
 
 
+@login_required(login_url='/login')
 def create_ticket_post(request, id):
     if request.method == "POST":
         context = {
@@ -77,6 +85,7 @@ def create_ticket_post(request, id):
         return render(request, 'triage/master.html')
 
 
+@login_required(login_url='/login')
 def view_ticket(request):
     if request.method == 'GET':
         context = {
@@ -91,6 +100,7 @@ def view_ticket(request):
         return
 
 
+@login_required(login_url='/login')
 def update_ticket(request, id):
     if request.method == 'POST':
         context = {
