@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    {% load static from static %}
+
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a> </li>
+        <li><a href="{% url 'issues' %}">Report</a></li>
+        <li><a href="{% url 'ticket' %}">Tickets</a></li>
+        <li><a href="https://aurora.edu/">AU Home Page</a></li>
+        <li style="float:right"><a class="active" href="{%  url 'login' %}">Log Out</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+    <h1 class="heading">Select An Issue</h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="{% static '/images/plum.png' %}" alt="">
+            <h3>Plumbing</h3>
+            <p>Choose this option to report an issue with plumbing including issues with sinks or toilets</p>
+            <a href="{% url 'plumbing' %}" class="btn">create report</a>
+        </div>
+
+        <div class="box">
+            <img src="{% static '/images/power.png' %}" alt="">
+            <h3>Electrical</h3>
+            <p>Choose this option to report an issue with light and power including charging stations</p>
+            <a href="{% url 'electrcial' %}" class="btn">create report</a>
+        </div>
+
+        <div class="box">
+            <img src="{% static '/images/wifi.png' %}" alt="">
+            <h3>IT</h3>
+            <p>Choose this option to report an issue with school computers, internet and smart boards</p>
+            <a href="{% url 'it' %}" class="btn">create report</a>
+        </div>
+
+        <div class="box">
+            <img src="{% static '/images/bug.png' %}" alt="">
+            <h3>Pest Control</h3>
+            <p>Choose this option to report presence or traces of unwanted animals or insects</p>
+            <a href="{% url 'pest' %}" class="btn">create report</a>
+        </div>
+
+        <div class="box">
+            <img src="{% static '/images/clean.png' %} " alt="">
+            <h3>Cleanliness</h3>
+            <p>Choose this option to report a mess or major spill as we like to keep our campus clean</p>
+            <a href="{% url 'cleaniness' %}" class="btn">create report</a>
+        </div>
+
+        <div class="box">
+            <img src="{% static '/images/ac.png'%} " alt="">
+            <h3>Heating & Cooling</h3>
+            <p>Choose this option to report an issue with heating or cooling including ventaltion</p>
+            <a href="{% url 'hvac' %}" class="btn">create report</a>
+        </div>
+        <div class="box">
+            <img src="{% static '/images/haz.png' %}" alt="">
+            <h3>Hazards</h3>
+            <p>Choose this option to report a hazard including exposed wires and flooded areas</p>
+            <a href="{% url 'hazards' %}" class="btn">create report</a>
+        </div>
+        <div class="box">
+            <img src=" {% static 'images/Tp.png'%} " alt="">
+            <h3>Restroom Supplies</h3>
+            <p>Choose this option to report the absence of restroom supplies including despensers </p>
+            <a href="{% url 'restroom' %}" class="btn">create report</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
