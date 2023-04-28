@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+</head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../../static/css/tick.css">
+</head>
+<body>
+<nav>
+  <ul>
+      <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'issues' %}">Report</a></li>
+    <li><a href="tickt.html">Tickets</a></li>
+    <li><a href="https://aurora.edu/">AU Home Page</a></li>
+    <li style="float:right"><a class="active" href="#about">Log Out</a></li>
+  </ul>
+</nav>
+<h1 style="text-align: center">Tickets</h1>
+
+<table>
+  <tr>
+    <th>Summary</th>
+    <th>Date Created</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td>Water leak room:123 building: Dunham</td>
+    <td>04/02/2023</td>
+    <td>In Progress </td>
+  </tr>
+  <tr>
+    <td>Smart board not powering on room: 122 building: Dunham</td>
+    <td>03/02/2022</td>
+    <td>Completed</td>
+  </tr>
+  <tr>
+    <td>Mouse found room:132 building: Dunham</td>
+    <td>03/02/2022</td>
+    <td>Completed</td>
+  </tr>
+  <tr>
+    <td>No Heat room:234 building: Dunham</td>
+    <td>02/27/2022</td>
+    <td>Completed</td>
+  </tr>
+
+</table>
+
+</body>
+</html>

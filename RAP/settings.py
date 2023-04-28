@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'RAP',
     'login',
     'TicketSystem',
+    'ReportingSystem',
 
 
 ]
