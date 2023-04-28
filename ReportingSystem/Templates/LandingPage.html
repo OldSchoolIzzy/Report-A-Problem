@@ -10,11 +10,12 @@
 <style>
 
   body{
-    background-color: #49a942;
+    background-color: #00549E;
     color: #dddddd;
   }
   div{
-    background-color: #00549E;
+    background-color: #dddddd;
+      color: #111111;
     align-content: center;
     margin-top: auto;
   }
@@ -25,14 +26,36 @@
     <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url "issues" %}">Report</a></li>
-        <li><a href="tickt.html">Tickets</a></li>
+        <li><a href="{% url 'ticket' %}">Tickets</a></li>
         <li><a href="https://aurora.edu/">AU Home Page</a></li>
-        <li style="float:right"><a class="active" href="#about">Log Out</a></li>
+        <li style="float:right"><a class="active" href="{%  url 'login' %}">Log Out</a></li>
     </ul>
 </nav>
-<h1>
-  Welcome To The Aurora University Report A Problem Application !
+<h1 style="text-align: center">
+  Aurora University Report A Problem
 </h1>
+<p style="margin-top: 35px; text-align: center;">Welcome to the Campus Problem Reporting Application! Here,
+    students and faculty can easily report any issues or concerns they have on campus, whether it be related to Wi-Fi issues or maintenance.
+    With this application, you can quickly and easily notify the appropriate authorities of any problems you encounter, ensuring that they are
+    addressed in a timely manner. Whether you see a broken light, a leaking faucet, or any other issue, please feel free to use this application to report it
+    and help us keep our campus safe and well-maintained. Thank you for using the Campus Problem Reporting Application!</p>
+
+<pre style="margin-top: 35px;text-align: left;">
+   1. Click on the REPORT tab located on the top of the page
+
+   2. From the report page, select the category that best describes your issue
+
+   3. Selecting the category will bring you to a new page, in this page select the building, room, proximity to the room and sub issue from the drop down menus
+
+   4. This step is optional, to add an image, click on add image button and select the photo you will like to attach. This application only allows jpeg format photos
+
+   5. Click Submit to submit the report!
+
+   6. To view previosuly created tickets you, click on the TICKET tab on the top of the page
+
+   7. To locate the correct building name refer the campus map found <a href="https://aurora.edu/about/maps-directions/index.html">here</a>
+</pre>
+
 
 </body>
 </html>

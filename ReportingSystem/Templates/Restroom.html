@@ -26,9 +26,9 @@
     <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'issues' %}">Report</a></li>
-        <li><a href="tickt.html">Tickets</a></li>
+        <li><a href="{% url 'ticket' %}">Tickets</a></li>
         <li><a href="https://aurora.edu/">AU Home Page</a></li>
-        <li style="float:right"><a class="active" href="#about">Log Out</a></li>
+        <li style="float:right"><a class="active" href="{%  url 'login' %}">Log Out</a></li>
     </ul>
 </nav>
 <h1 style="text-align: center">Reporting Restroom Supplies Shortage On Campus</h1>
@@ -36,15 +36,15 @@
 <div class="container">
     <form action="/action_page.php">
 
-        <label for="location">Location:</label>
+        <label for="location">Location</label>
         <select id="location" name="location">
             <option value="" selected="selected">Select Building</option>
             <option value="Dunham">Dunham</option>
             <option value="Stephens">Stephens</option>
-            <option value="Building">Building</option>
+            <option value="Eckhart Hall">Eckhart Hall</option>
         </select>
 
-        <label for="bathroom">Room:</label>
+        <label for="bathroom">Bathroom Number</label>
         <select id="bathroom" name="bathroom">
             <option value="" selected="selected">Select Bathroom</option>
             <option value="101">101</option>
@@ -53,7 +53,7 @@
             <option value="206">106</option>
         </select><br><br>
 
-        <label for="issue">Issue:</label>
+        <label for="issue">Issue</label>
         <select id="issue" name="issue">
             <option value="">Select Issue</option>
             <option value="tp">No Toilet Paper In Stall</option>
@@ -65,7 +65,7 @@
         <form action="/action_page.php">
             <input type="file" id="myFile" name="filename" accept="image/jpeg" maxlength="1784320">
         </form>
-        <label for="comments">Comments:</label><br>
+        <label for="comments">Comments</label><br>
         <textarea id="comments" name="comments" rows="5" cols="50" placeholder="250 Max Characters" maxlength="250"></textarea><br><br>
 
         <input type="submit" value="Submit">
