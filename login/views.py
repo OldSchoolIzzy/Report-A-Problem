@@ -43,14 +43,13 @@ def loginPage(request):
         suser = User.objects.get(username=username)
         roleID = userRole.objects.filter(user_id=suser.id).values().last()
 
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        elif user is not None:
+        if user is not None and suser.id == 2:
             login(request, user)
             return redirect('/triage')
+        elif user is not None:
+            login(request, user)
+            return redirect('home')
         else:
-            messages.info(request, roleID)
             messages.info(request, "Username or Password is incorrect")
 
     context = {}
