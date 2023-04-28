@@ -1,16 +1,15 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+import datetime
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 from .models import Ticket
 
 
-@login_required(login_url='/login')
 def triage(request):
     tickets = Ticket.objects.all()
-
     return render(request, 'triage/master.html', {'tickets': tickets})
 
 
-@login_required(login_url='/login')
 def pending(request):
     if request.method == "POST":
         return render(request, 'ticket/CreateTicket.html')
@@ -19,94 +18,70 @@ def pending(request):
         return render(request, 'triage/pending.html', {'tickets': pending_tickets})
 
 
-@login_required(login_url='/login')
 def unsolved(request):
     if request.method == "POST":
-        context = {
-            'requester': 'Israel Herrera',
-            'Subject': 'My sink ran away',
-            'request': request,
-        }
-        return render(request, 'ticket/CreateTicket.html', context)
+
+        return render(request, 'ticket/CreateTicket.html', )
     if request.method == "GET":
         unsolved_tickets = Ticket.objects.filter(status='U')
         return render(request, 'triage/unsolved.html', {'tickets': unsolved_tickets})
 
 
-@login_required(login_url='/login')
 def solved(request):
     if request.method == "POST":
-        context = {
-            'requester': 'Israel Herrera',
-            'Subject': 'My sink ran away',
-            'request': request,
-        }
-        return render(request, 'ticket/CreateTicket.html', context)
+
+        return render(request, 'ticket/CreateTicket.html', )
     if request.method == "GET":
         solved_tickets = Ticket.objects.filter(status='S')
         return render(request, 'triage/solved.html', {'tickets': solved_tickets})
 
 
-@login_required(login_url='/login')
 def open_ticket(request):
     if request.method == "POST":
-        context = {
-            'requester': 'Israel Herrera',
-            'Subject': 'My sink ran away',
-            'request': request,
-        }
-        return render(request, 'ticket/CreateTicket.html', context)
+        return render(request, 'ticket/CreateTicket.html', )
     if request.method == "GET":
         open_tickets = Ticket.objects.filter(status='O')
         return render(request, 'triage/open.html', {'tickets': open_tickets})
 
 
-@login_required(login_url='/login')
 def create_ticket(request):
     if request.method == "POST":
-        context = {
-            'requester': 'Israel Herrera',
-            'Subject': 'My sink ran away',
-            'request': request,
-        }
-        return render(request, 'triage/master.html')
+        user = User.objects.get(username=request.POST['requester'])
+        ticket = Ticket(subject=request.POST['subject'],
+                        username_id=user.id,
+                        dateCreated=datetime,
+                        priority=request.POST['priority'],
+                        buildingName=request.POST['building'],
+                        status=request.POST['option'],
+                        description=request.POST['note'])
+        ticket.save()
+        return redirect('http://127.0.0.1:8000/triage/')
     else:
         return render(request, 'ticket/CreateTicket.html')
 
 
-@login_required(login_url='/login')
 def create_ticket_post(request, id):
     if request.method == "POST":
-        context = {
-            'requester': 'Israel Herrera',
-            'Subject': 'My sink ran away',
-            'request': request,
-        }
         return render(request, 'triage/master.html')
 
 
-@login_required(login_url='/login')
-def view_ticket(request):
-    if request.method == 'GET':
-        context = {
-            'requester': 'Israel Herrera',
-            'Subject': 'My sink ran away',
-            'request': request,
-            'requestNote': 'I have no idea what i am doing'
-        }
-        return render(request, 'ticket/viewTicket.html', context)
-    if request.method == 'UPDATE':
-        # Update the ticket in the database
-        return
+def view_ticket(request, ticket_id):
+    if request.method == 'POST':
+        ticket = Ticket.objects.get(pk=ticket_id)
+        subject = request.POST['subject']
+        priority = request.POST['priority']
+        building = request.POST['building']
+        option = request.POST['option']
+        ticket.subject = subject
+        ticket.buildingName = building
+        ticket.status = option
+        ticket.priority = priority
+        ticket.save()
+        return redirect('http://127.0.0.1:8000/triage/')
+    ticket = Ticket.objects.get(id=ticket_id)
+    return render(request, 'ticket/viewTicket.html', {'ticket': ticket, 'options': ticket.STATUS_TYPES})
 
 
-@login_required(login_url='/login')
 def update_ticket(request, id):
     if request.method == 'POST':
-        context = {
-            'requester': 'Israel Herrera',
-            'Subject': 'My sink ran away',
-            'request': request,
-            'requestNote': 'I have no idea what i am doing'
-        }
-        return render(request, 'triage/master.html', context)
+        return render(request, 'triage/master.html', )

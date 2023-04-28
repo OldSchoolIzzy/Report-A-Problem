@@ -6,98 +6,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../static/css/createTicket.css">
+    {% load static from static %}
+    <link rel="stylesheet" href="{% static "css/createTicket.css" %}">
 </head>
 <body>
 <!-- Navbar -->
-<div class="w3-bar w3-border w3-light-grey">
-  <a href="{% url 'triage' %}" class="w3-bar-item w3-button">Home</a>
-  <a href="{% url 'create_ticket' %}" class="w3-bar-item w3-button">Create Ticket</a>
-  <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-green w3-right">Logout</a>
+<div class="w3-bar w3-border w3-white">
+  <a href="{% url 'triage' %}" class="w3-bar-item w3-button" style="color: #00467F">Home</a>
+  <a href="{% url 'create_ticket' %}" class="w3-bar-item w3-button" style="color: #00467F">Create Ticket</a>
+  <a href="{% url 'login' %}" class="w3-bar-item w3-text-white w3-button w3-right" style="background-color: #00467F">Logout</a>
 </div>
     <!-- Sidebar -->
+<form method="POST" action="http://127.0.0.1:8000/triage/viewTicket/{{ ticket.id }}/">
+    {% csrf_token %}
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
-        <h3 class="w3-bar-item">Ticket Details</h3>
+        <h3 class="w3-bar-item">Ticket ID: {{ ticket.id }}</h3>
         <label class="w3-text-black"><b>Requester</b></label>
         <label>
-            <input class="w3-input w3-border" name="requester" type="text" value="{{ requester }}">
-        </label>
-        <label for="assignee">Choose an assignee:</label>
-          <select name="assignee" id="assignee">
-            <optgroup label="Maintenance">
-              <option value="bdylan">Bob Dylan</option>
-              <option value="dboyle">Dan Boyle</option>
-            </optgroup>
-            <optgroup label="Custodial">
-              <option value="ssmith">Sarah Smith</option>
-              <option value="jsmith">John Smith</option>
-            </optgroup>
-          </select>
-
-        <label>
-            <select class="w3-select" name="priority">
-                  <option value="" disabled selected>Priority</option>
-                  <option value="1">Low</option>
-                  <option value="2">High</option>
-                  <option value="3">Medium</option>
-            </select>
+            <input class="w3-input w3-border" name="requester" type="text" value="{{ ticket.username }}">
         </label>
 
-        <label>
-            <select class="w3-select" name="building">
-                  <option value="" disabled selected>Location</option>
-                  <option value="1">Dunham Hall</option>
-                  <option value="2">Stephens Hall</option>
-                  <option value="3">John C. Dunham Hall</option>
-            </select>
+        <label for="priority">Choose priority:
+        <select class="w3-select" name="priority">
+            <option value="" disabled selected>Priority</option>
+            <option value="L" {% if ticket.priority == "L" %}selected{% endif %}>Low</option>
+            <option value="M" {% if ticket.priority == "M" %}selected{% endif %}>Medium</option>
+            <option value="H" {% if ticket.priority == "H" %}selected{% endif %}>High</option>
+        </select>
+        </label>
+        <label for="building">Choose building:
+        <select class="w3-select" name="building">
+              <option value="" disabled selected>Location</option>
+              <option value="Dunham Hall" {% if ticket.buildingName == "Dunham Hall" %}selected{% endif %}>
+                  Dunham Hall
+              </option>
+              <option value="Stephens Hall" {% if ticket.buildingName == "Stephens Hall" %}selected{% endif %}>
+                  Stephens Hall
+              </option>
+              <option value="John C. Dunham Hall" {% if ticket.buildingName == "John C. Dunham Hall" %}selected{% endif %}>
+                  John C. Dunham Hall
+              </option>
+        </select>
         </label>
     </div>
     <!-- Page Content -->
     <div style="margin-left:25%">
-        <div class="w3-container w3-teal">
+        <div class="w3-container w3-text-white" style="background-color: #00467F">
             <h1>Ticket Details</h1>
         </div>
         <div class="container">
-            <form method="POST" action="">
-                {% csrf_token %}
 
                 <label for="subject">Subject</label>
-                <input type="text" id="subject" name="subject" value="{{ Subject }}">
+                <input type="text" id="subject" name="subject" value="{{ ticket.subject }}">
 
-                {% comment %} event is deprecated so might need to update this in the future {% endcomment %}
-                <div class="w3-bar w3-teal">
+                <div class="w3-bar w3-text-white" style="background-color: #00467F">
                   <span class="w3-bar-item w3-button tablink w3-grey" onclick="openCity(event, 'RequesterNote')">Requester Note</span>
                   <span class="w3-bar-item w3-button tablink" onclick="openCity(event, 'InternalNote')">Internal Notes</span>
-                  <span class="w3-bar-item w3-button tablink" onclick="openCity(event, 'Other')">Other</span>
+                  <span class="w3-bar-item w3-button tablink" onclick="openCity(event, 'Image')">Image</span>
                 </div>
 
                 <div id="RequesterNote" class="w3-container tab">
                     <div class="w3-panel w3-border" style="background-color: white">
-                        <p>{{ requestNote }}</p>
+                        <p>{{ ticket.description }}</p>
                     </div>
                 </div>
                 <div id="InternalNote" class="w3-container tab" style="display:none">
                     <label for="InternalNote"></label>
                     <textarea id="InternalNote" name="InternalNote" placeholder="Write internal note..." style="height:100px"></textarea>
-                    <p> internal notes list go here</p>
-                </div>
-                <div id="Other" class="w3-container tab" style="display:none">
-                  <p>I have no idea what this is..... oof.</p>
                 </div>
 
                 <label>
                     <select class="w3-select" name="option">
                         <option value="" disabled selected>Choose your option</option>
-                        <option value="1">Solved</option>
-                        <option value="2">Pending</option>
-                        <option value="2">Unsolved</option>
-                        <option value="2">Open</option>
+                        <option value="S" {% if ticket.status == "S" %}selected{% endif %}>Solved</option>
+                        <option value="P" {% if ticket.status == "P" %}selected{% endif %}>Pending</option>
+                        <option value="U" {% if ticket.status == "U" %}selected{% endif %}>Unsolved</option>
+                        <option value="O" {% if ticket.status == "O" %}selected{% endif %}>Open</option>
                     </select>
                 </label>
-                <input type="submit" value="Update">
-            </form>
+                <input type="submit" value="Update" class="w3-button w3-white w3-border w3-border-blue w3-round">
         </div>
     </div>
+</form>
 <script>
     function myDropFunc() {
       var x = document.getElementById("demoDrop");

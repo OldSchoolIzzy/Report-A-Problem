@@ -14,113 +14,38 @@
 </head>
 <body>
 <!-- Navbar -->
-<div class="w3-bar w3-border w3-light-grey">
+<div class="w3-bar w3-border w3-white">
   <a href="{% url 'triage' %}" class="w3-bar-item w3-button" style="color: #00467F">Home</a>
   <a href="{% url 'create_ticket' %}" class="w3-bar-item w3-button" style="color: #00467F">Create Ticket</a>
   <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-right w3-text-white" style="background-color: #00467F">Logout</a>
 </div>
-
-{% if request.method == "POST"%}
-    <!-- Sidebar -->
-    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
-        <h3 class="w3-bar-item">Ticket Details</h3>
-        <label class="w3-text-black"><b>Requester</b></label>
-        <label>
-            <input class="w3-input w3-border" name="requester" type="text" value="{{ requester }}">
-        </label>
-        <label for="assignee">Choose an assignee:</label>
-          <select name="assignee" id="assignee">
-            <optgroup label="Maintenance">
-              <option value="bdylan">Bob Dylan</option>
-              <option value="dboyle">Dan Boyle</option>
-            </optgroup>
-            <optgroup label="Custodial">
-              <option value="ssmith">Sarah Smith</option>
-              <option value="jsmith">John Smith</option>
-            </optgroup>
-          </select>
-
-        <label>
-            <select class="w3-select" name="priority">
-                  <option value="" disabled selected>Priority</option>
-                  <option value="1">Low</option>
-                  <option value="2">High</option>
-                  <option value="3">Medium</option>
-            </select>
-        </label>
-
-        <label>
-            <select class="w3-select" name="building">
-                  <option value="" disabled selected>Location</option>
-                  <option value="1">Dunham Hall</option>
-                  <option value="2">Stephens Hall</option>
-                  <option value="3">John C. Dunham Hall</option>
-            </select>
-        </label>
-    </div>
-    <!-- Page Content -->
-    <div style="margin-left:25%">
-        <div class="w3-container w3-teal">
-            <h1>Ticket Details</h1>
-        </div>
-        <div class="container">
-            <form method="post">
-                {% csrf_token %}
-                <label for="subject">Subject</label>
-                <input type="text" id="subject" name="subject" value="{{ Subject }}">
-                <label for="note">Note</label>
-                <textarea id="note" name="note" placeholder="Write note..." style="height:200px"></textarea>
-                <label>
-                    <select class="w3-select" name="option">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="1">Solved</option>
-                        <option value="2">Pending</option>
-                        <option value="2">Unsolved</option>
-                        <option value="2">Open</option>
-                    </select>
-                </label>
-                <input type="submit" value="Update">
-            </form>
-        </div>
-    </div>
-{% else %}
+<form method="post" action="http://127.0.0.1:8000/triage/create/">
+    {% csrf_token %}
     <!-- Sidebar -->
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
 
         <h3 class="w3-bar-item">New Ticket</h3>
 
         <label class="w3-text-black"><b>Requester</b></label>
-        <label>
+        <label for="requester">
             <input class="w3-input w3-border" name="requester" type="text">
         </label>
 
-        <label for="assignee">Choose an assignee:</label>
-          <select name="assignee" id="assignee">
-            <optgroup label="Maintenance">
-              <option value="bdylan">Bob Dylan</option>
-              <option value="dboyle">Dan Boyle</option>
-            </optgroup>
-            <optgroup label="Custodial">
-              <option value="ssmith">Sarah Smith</option>
-              <option value="jsmith">John Smith</option>
-            </optgroup>
-          </select>
-
-        <label>
+        <label>Choose priority:
             <select class="w3-select" name="priority">
-                  <option value="" disabled selected>Priority</option>
-                  <option value="1">Low</option>
-                  <option value="2">High</option>
-                  <option value="3">Medium</option>
+                <option value="" disabled selected>Priority</option>
+                <option value="L">Low</option>
+                <option value="M">Medium</option>
+                <option value="H">High</option>
             </select>
         </label>
 
-        <label>
+        <label>Choose building:
             <select class="w3-select" name="building">
                   <option value="" disabled selected>Location</option>
-                  <option value="1">Dunham Hall</option>
-                  <option value="2">Stephens Hall</option>
-                  <option value="3">John C. Dunham Hall</option>
+                  <option value="Dunham Hall">Dunham Hall</option>
+                  <option value="Stephens Hall">Stephens Hall</option>
+                  <option value="John C. Dunham Hall">John C. Dunham Hall</option>
             </select>
         </label>
     </div>
@@ -130,26 +55,23 @@
             <h1>Create New Ticket</h1>
         </div>
         <div class="container">
-            <form method="post" action="">
-             {% csrf_token %}
-                <label for="subject">Subject</label>
-                <input type="text" id="subject" name="subject" placeholder="Enter subject...">
-                <label for="note">Note</label>
-                <textarea id="note" name="note" placeholder="Write note..." style="height:100px"></textarea>
-                <label>
-                    <select class="w3-select" name="option">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="1">Solved</option>
-                        <option value="2">Pending</option>
-                        <option value="2">Unsolved</option>
-                        <option value="2">Open</option>
-                    </select>
-                </label>
-                <input type="submit" value="Update" class="w3-white">
-            </form>
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Enter subject...">
+            <label for="note">Note</label>
+            <textarea id="note" name="note" placeholder="Write note..." style="height:100px"></textarea>
+            <label for="option">
+                <select class="w3-select" name="option">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="S">Solved</option>
+                    <option value="P">Pending</option>
+                    <option value="U">Unsolved</option>
+                    <option value="O">Open</option>
+                </select>
+            </label>
+            <input type="submit" value="Update" class="w3-button w3-white w3-border w3-border-blue w3-round">
         </div>
     </div>
-{% endif %}
+</form>
 
 <script>
     function myDropFunc() {
