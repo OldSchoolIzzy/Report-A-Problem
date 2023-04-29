@@ -1,5 +1,6 @@
 import datetime
 
+from django.core.files.storage import default_storage
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import Ticket
@@ -47,13 +48,15 @@ def open_ticket(request):
 def create_ticket(request):
     if request.method == "POST":
         user = User.objects.get(username=request.POST['requester'])
+
         ticket = Ticket(subject=request.POST['subject'],
                         username_id=user.id,
                         dateCreated=datetime,
                         priority=request.POST['priority'],
                         buildingName=request.POST['building'],
                         status=request.POST['option'],
-                        description=request.POST['note'])
+                        description=request.POST['note'],
+                        image=request.FILES['image'])
         ticket.save()
         return redirect('http://127.0.0.1:8000/triage/')
     else:
