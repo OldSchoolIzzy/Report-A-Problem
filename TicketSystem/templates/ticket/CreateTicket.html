@@ -19,7 +19,7 @@
   <a href="{% url 'create_ticket' %}" class="w3-bar-item w3-button" style="color: #00467F">Create Ticket</a>
   <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-right w3-text-white" style="background-color: #00467F">Logout</a>
 </div>
-<form method="post" action="http://127.0.0.1:8000/triage/create/">
+<form method="post" action="http://127.0.0.1:8000/triage/create/" enctype="multipart/form-data">
     {% csrf_token %}
     <!-- Sidebar -->
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
@@ -57,8 +57,13 @@
         <div class="container">
             <label for="subject">Subject</label>
             <input type="text" id="subject" name="subject" placeholder="Enter subject...">
+
             <label for="note">Note</label>
             <textarea id="note" name="note" placeholder="Write note..." style="height:100px"></textarea>
+
+            <label for="image">Choose Image (Optional):</label>
+            <input type="file" id="image" name="image" accept="image/png, image/jpeg">
+
             <label for="option">
                 <select class="w3-select" name="option">
                     <option value="" disabled selected>Choose your option</option>
