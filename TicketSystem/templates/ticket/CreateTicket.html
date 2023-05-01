@@ -28,11 +28,11 @@
 
         <label class="w3-text-black"><b>Requester</b></label>
         <label for="requester">
-            <input class="w3-input w3-border" name="requester" type="text">
+            <input class="w3-input w3-border" name="requester" type="text" required>
         </label>
 
         <label>Choose priority:
-            <select class="w3-select" name="priority">
+            <select class="w3-select" name="priority" required>
                 <option value="" disabled selected>Priority</option>
                 <option value="L">Low</option>
                 <option value="M">Medium</option>
@@ -41,7 +41,7 @@
         </label>
 
         <label>Choose building:
-            <select class="w3-select" name="building">
+            <select class="w3-select" name="building" required>
                   <option value="" disabled selected>Location</option>
                   <option value="Dunham Hall">Dunham Hall</option>
                   <option value="Stephens Hall">Stephens Hall</option>
@@ -56,16 +56,16 @@
         </div>
         <div class="container">
             <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject" placeholder="Enter subject...">
+            <input minlength="1" maxlength="100" type="text" id="subject" name="subject" placeholder="Enter subject..." required>
 
             <label for="note">Note</label>
-            <textarea id="note" name="note" placeholder="Write note..." style="height:100px"></textarea>
+            <textarea minlength="1" maxlength="255" id="note" name="note" placeholder="Write note..." style="height:100px" required></textarea>
 
             <label for="image">Choose Image (Optional):</label>
             <input type="file" id="image" name="image" accept="image/png, image/jpeg">
 
             <label for="option">
-                <select class="w3-select" name="option">
+                <select class="w3-select" name="option" required>
                     <option value="" disabled selected>Choose your option</option>
                     <option value="S">Solved</option>
                     <option value="P">Pending</option>
