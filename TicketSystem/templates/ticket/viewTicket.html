@@ -74,6 +74,14 @@
                     <label for="InternalNote"></label>
                     <textarea id="InternalNote" name="InternalNote" placeholder="Write internal note..." style="height:100px"></textarea>
                 </div>
+                <div id="Image" class="w3-container tab" style="display:none">
+                    {% if ticket.image %}
+                        <img src="{{ ticket.image.url }}" alt="Image" height="350px" width="350px">
+                    {% else %}
+                        <label for="image">Choose Image (Optional):</label>
+                        <input type="file" id="image" name="image" accept="image/png, image/jpeg">
+                    {% endif %}
+                </div>
 
                 <label>
                     <select class="w3-select" name="option">
