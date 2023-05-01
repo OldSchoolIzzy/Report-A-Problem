@@ -33,7 +33,8 @@ class Ticket(models.Model):
     buildingName = models.CharField(max_length=25)
     status = models.CharField(max_length=15, choices=STATUS_TYPES, default=UNSOLVED)
     description = models.TextField(max_length=255)
-    # problemType = models.CharField(max_length=15, choices=PROBLEM_TYPES)
+    issue = models.CharField(max_length=25, default='Other')
+    room = models.CharField(max_length=15, default='0')
     image = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def __str__(self):
