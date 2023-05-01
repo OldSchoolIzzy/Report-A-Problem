@@ -12,7 +12,8 @@ urlpatterns = [
     path('pest/', views.pest, name="pest"),
     path('plumbing/', views.plumbing, name="plumbing"),
     path('restroom', views.restroom, name="restroom"),
-    path('ticket/', views.ticket, name="ticket")
+    path('ticket/', views.ticket, name="ticket"),
+    path('create/', views.create_ticket, name='create_ticket'),
 
 
 

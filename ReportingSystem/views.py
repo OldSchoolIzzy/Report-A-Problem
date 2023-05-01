@@ -1,4 +1,10 @@
-from django.shortcuts import render
+from datetime import datetime
+
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+
+from TicketSystem.models import Ticket
+
 
 def home(request):
     return render(request, "LandingPage.html")
@@ -30,4 +36,50 @@ def restroom(request):
 
 def ticket(request):
     return render(request,"tickt.html")
+def create_ticket(request):
+    if request.method == "POST":
+        user = User.objects.get(username=request.POST['requester'])
+        filepath = request.FILES['image'] if 'image' in request.FILES else False
+        if filepath is not False:
+            ticket = Ticket(subject=request.POST['subject'],
+                            username_id=user.id,
+                            dateCreated=datetime,
+                            priority=request.POST['priority'],
+                            buildingName=request.POST['building'],
+                            status=request.POST['option'],
+                            description=request.POST['note'],
+                            image=request.FILES['image'],
+                            issue=request.POST['issue'],
+                            room=request.POST['room'])
+
+
+
+            ticket.save()
+            return redirect('http://127.0.0.1:8000/triage/')
+        ticket = Ticket(subject=request.POST['subject'],
+                        username_id=user.id,
+                        dateCreated=datetime,
+                        priority=request.POST['priority'],
+                        buildingName=request.POST['building'],
+                        status=request.POST['option'],
+                        issue=request.POST['issue'],
+                        description=request.POST['note'],
+                        room=request.POST['room'])
+        ticket.save()
+
+# def create_ticket(request):
+#     if request.method == 'POST':
+#         form = TicketForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             ticket = form.save()
+#             return redirect('ticket_list')
+#     else:
+#         form = TicketForm()
+#
+#     return render(request, 'create_ticket.html', {'form': form})
+
+# def ticket_list(request):
+#     tickets = Ticket.objects.all()
+#     return render(request, 'ticket_list.html', {'tickets': tickets})
+
 
