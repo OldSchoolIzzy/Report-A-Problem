@@ -7,20 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/css/form.css">
 </head>
-<script>
-    const form = document.querySelector('form');
-    const result = document.getElementById('result');
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const location = document.getElementById('location').value;
-        const room = document.getElementById('room').value;
-        const issue = document.getElementById('issue').value;
-        const comments = document.getElementById('comments').value;
-        const message = `You have reported a problem in ${location} room ${room}: prxomity${proximity} issue:${issue}. Your comments: ${comments}`;
-        result.textContent = message;
-    });
-</script>
+{#<script>#}
+{#    #}
+{#    const form = document.querySelector('form');#}
+{#    const result = document.getElementById('result');#}
+{##}
+{#    form.addEventListener('submit', function(event) {#}
+{#        event.preventDefault();#}
+{#        const location = document.getElementById('location').value;#}
+{#        const room = document.getElementById('room').value;#}
+{#        const issue = document.getElementById('issue').value;#}
+{#        const comments = document.getElementById('comments').value;#}
+{#        const message = `You have reported a problem in ${location} room ${room}: prxomity${proximity} issue:${issue}. Your comments: ${comments}`;#}
+{#        result.textContent = message;#}
+{#    });#}
+{#</script>#}
 <body>
 <nav>
     <ul>

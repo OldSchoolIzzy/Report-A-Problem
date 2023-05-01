@@ -55,7 +55,7 @@ def create_ticket(request):
 
 
             ticket.save()
-            return redirect('http://127.0.0.1:8000/triage/')
+            return redirect('http://127.0.0.1:8000/ticket/')
         ticket = Ticket(subject=request.POST['subject'],
                         username_id=user.id,
                         dateCreated=datetime,
