@@ -42,6 +42,8 @@ def create_ticket(request):
                             buildingName=request.POST['building'],
                             status=request.POST['option'],
                             description=request.POST['note'],
+                            room=request.POST['room'],
+                            issue=request.POST['issue'],
                             image=request.FILES['image'])
             ticket.save()
             return redirect('http://127.0.0.1:8000/triage/')
@@ -51,7 +53,10 @@ def create_ticket(request):
                         priority=request.POST['priority'],
                         buildingName=request.POST['building'],
                         status=request.POST['option'],
-                        description=request.POST['note'])
+                        description=request.POST['note'],
+                        room=request.POST['room'],
+                        issue=request.POST['issue'],
+                        )
         ticket.save()
         return redirect('http://127.0.0.1:8000/triage/')
     else:
