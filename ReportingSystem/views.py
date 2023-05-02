@@ -44,9 +44,8 @@ def create_ticket(request):
             ticket = Ticket(subject=request.POST['subject'],
                             username_id=user.id,
                             dateCreated=datetime,
-                            priority=request.POST['priority'],
                             buildingName=request.POST['building'],
-                            status=request.POST['option'],
+
                             description=request.POST['note'],
                             image=request.FILES['image'],
                             issue=request.POST['issue'],
@@ -55,17 +54,17 @@ def create_ticket(request):
 
 
             ticket.save()
-            return redirect('http://127.0.0.1:8000/ticket/')
+            return redirect('http://127.0.0.1:8000/system/ticket')
         ticket = Ticket(subject=request.POST['subject'],
                         username_id=user.id,
                         dateCreated=datetime,
-                        priority=request.POST['priority'],
                         buildingName=request.POST['building'],
-                        status=request.POST['option'],
+
                         issue=request.POST['issue'],
                         description=request.POST['note'],
                         room=request.POST['room'])
         ticket.save()
+        return redirect('http://127.0.0.1:8000/system/ticket')
 
 # def create_ticket(request):
 #     if request.method == 'POST':

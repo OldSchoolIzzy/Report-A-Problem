@@ -34,17 +34,21 @@
 <h1 style="text-align: center">Reporting A Hazard On Campus</h1>
 
 <div class="container">
-    <form action="/action_page.php">
+    <form method="post" action="http://127.0.0.1:8000/system/create/" enctype="multipart/form-data">
+        {%  csrf_token %}
 
-        <label for="location">Location:</label>
-        <select id="location" name="location">
+        <label for ="requester">Username</label>
+        <input type="text" name="requester" required>
+
+        <label for="building">Building</label>
+        <select id="building" name="building">
             <option value="" selected="selected">Select Building</option>
-            <option value="Dunham">Dunham</option>
-            <option value="Stephens">Stephens</option>
-           <option value="Eckhart Hall">Eckhart Hall</option>
-        </select>
+            <option value="Dunham Hall">Dunham Hall</option>
+            <option value="Stephens Hall">Stephens Hall</option>
+           <option value="John C. Hall">John C. Hall</option>
+        </select><br><br>
 
-        <label for="room">Room:</label>
+        <label for="room">Room</label>
         <select id="room" name="room">
             <option value="" selected="selected">Select Room</option>
             <option value="101">101</option>
@@ -56,14 +60,12 @@
             <option value="107">107</option>
         </select><br><br>
 
-        <label for="proximity">In Or Near Room Selected</label>
-        <select id="proximity" name="proximity">
-            <option value="" selected="selected">Select Proximity</option>
-            <option value="1">in</option>
-            <option value="2">near</option>
-        </select>
+        <label for="subject">Subject</label>
+        <select id="subject" name="subject">
+            <option value="Hazards">Hazards</option>
+        </select><br><br>
 
-        <label for="issue">Issue:</label>
+        <label for="issue">Issue</label>
         <select id="issue" name="issue">
             <option value="">Select Issue</option>
             <option value="exposed">Exposed Wires</option>
@@ -75,12 +77,13 @@
             <option value="PoorLit">Poorly Lit Area</option>
             <option Value="Other">Other, Please add description in comments section</option>
         </select><br><br>
+
         <p>Upload Image</p>
-        <form action="/action_page.php">
-            <input type="file" id="myFile" name="filename" accept="image/jpeg" maxlength="1784320">
-        </form>
-        <label for="comments">Comments</label><br>
-        <textarea id="comments" name="comments" rows="5" cols="50" placeholder="250 Max Characters" maxlength="250"></textarea><br><br>
+
+        <input type="file" id="image" name="image" accept="image/jpeg, image/png" maxlength="1784320">
+
+        <label for="note">Comments</label><br>
+        <textarea id="note" name="note" rows="5" cols="50" placeholder="250 Max Characters" maxlength="250"></textarea><br><br>
 
         <input type="submit" value="Submit">
     </form>

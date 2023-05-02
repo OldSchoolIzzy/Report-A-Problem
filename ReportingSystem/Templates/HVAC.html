@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/css/form.css">
 </head>
-<script>
-    const form = document.querySelector('form');
-    const result = document.getElementById('result');
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const location = document.getElementById('location').value;
-        const room = document.getElementById('room').value;
-        const issue = document.getElementById('issue').value;
-        const comments = document.getElementById('comments').value;
-        const message = `You have reported a problem in ${location} room ${room}: prxomity${proximity} issue:${issue}. Your comments: ${comments}`;
-        result.textContent = message;
-    });
-</script>
+{#<script>#}
+{#    const form = document.querySelector('form');#}
+{#    const result = document.getElementById('result');#}
+{##}
+{#    form.addEventListener('submit', function(event) {#}
+{#        event.preventDefault();#}
+{#        const location = document.getElementById('location').value;#}
+{#        const room = document.getElementById('room').value;#}
+{#        const issue = document.getElementById('issue').value;#}
+{#        const comments = document.getElementById('comments').value;#}
+{#        const message = `You have reported a problem in ${location} room ${room}: prxomity${proximity} issue:${issue}. Your comments: ${comments}`;#}
+{#        result.textContent = message;#}
+{#    });#}
+{#</script>#}
 <body>
 <nav>
     <ul>
@@ -34,10 +34,14 @@
 <h1 style="text-align: center">Reporting A Cooling And Heating Issue On Campus</h1>
 
 <div class="container">
-    <form action="/action_page.php">
+    <form method="post" action="http://127.0.0.1:8000/system/create/" enctype="multipart/form-data">
+        {%  csrf_token %}
 
-        <label for="location">Location</label>
-        <select id="location" name="location">
+        <label for ="requester">Username</label>
+        <input type="text" name="requester" required>
+
+        <label for="building">Building</label>
+        <select id="building" name="building">
             <option value="" selected="selected">Select Building</option>
             <option value="Dunham">Dunham</option>
             <option value="Stephens">Stephens</option>
@@ -56,12 +60,11 @@
             <option value="107">107</option>
         </select><br><br>
 
-        <label for="proximity">In Or Near Room Selected</label>
-        <select id="proximity" name="proximity">
-            <option value="" selected="selected">Select Proximity</option>
-            <option value="1">In room</option>
-            <option value="2">Near room</option>
-        </select>
+        <label for="subject">Subject</label>
+        <select id="subject" name="subject">
+            <option value="Heating and Cooling">Heating and Cooling</option>
+        </select><br><br>
+
 
         <label for="issue">Issue</label>
         <select id="issue" name="issue">
@@ -74,14 +77,15 @@
             <option value="Power">Room gradually gets hotter or colder</option>
             <option Value="Other">Other, Please add description in comments section</option>
         </select><br><br>
-        <p>Upload Image</p>
-        <form action="/action_page.php">
-            <input type="file" id="myFile" name="filename" accept="image/jpeg" maxlength="1784320">
-        </form>
-        <label for="comments">Comments</label><br>
-        <textarea id="comments" name="comments" rows="5" cols="50" placeholder="250 Max Characters" maxlength="250"></textarea><br><br>
 
-        <input type="submit" value="Submit" onclick="">
+        <p>Upload Image</p>
+
+        <input type="file" id="image" name="image" accept="image/jpeg, image/png" maxlength="1784320">
+
+        <label for="note">Comments</label><br>
+        <textarea id="note" name="note" rows="5" cols="50" placeholder="250 Max Characters" maxlength="250"></textarea><br><br>
+
+        <input type="submit" value="Submit" >
     </form>
 </div>
 
