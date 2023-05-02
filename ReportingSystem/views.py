@@ -36,7 +36,7 @@ def restroom(request):
 
 def ticket(request):
     return render(request,"tickt.html")
-def create_ticket(request):
+def create_ticket_2(request):
     if request.method == "POST":
         user = User.objects.get(username=request.POST['requester'])
         filepath = request.FILES['image'] if 'image' in request.FILES else False
