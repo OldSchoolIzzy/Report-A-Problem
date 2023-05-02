@@ -7,20 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/css/form.css">
 </head>
-<script>
-    const form = document.querySelector('form');
-    const result = document.getElementById('result');
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const location = document.getElementById('location').value;
-        const room = document.getElementById('room').value;
-        const issue = document.getElementById('issue').value;
-        const comments = document.getElementById('comments').value;
-        const message = `You have reported a problem in ${location} room ${room}: prxomity${proximity} issue:${issue}. Your comments: ${comments}`;
-        result.textContent = message;
-    });
-</script>
+{#<script>#}
+{#    #}
+{#    const form = document.querySelector('form');#}
+{#    const result = document.getElementById('result');#}
+{##}
+{#    form.addEventListener('submit', function(event) {#}
+{#        event.preventDefault();#}
+{#        const location = document.getElementById('location').value;#}
+{#        const room = document.getElementById('room').value;#}
+{#        const issue = document.getElementById('issue').value;#}
+{#        const comments = document.getElementById('comments').value;#}
+{#        const message = `You have reported a problem in ${location} room ${room}: prxomity${proximity} issue:${issue}. Your comments: ${comments}`;#}
+{#        result.textContent = message;#}
+{#    });#}
+{#</script>#}
 <body>
 <nav>
     <ul>
@@ -34,15 +35,21 @@
 <h1 style="text-align: center">Reporting Eelectrical Issue</h1>
 
 <div class="container">
-    <form action="/action_page.php">
+    <form method="post" action="http://127.0.0.1:8000/system/create/" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for ="requester">Username</label>
+        <input type="text" name="requester" required>
 
-        <label for="location">Location</label>
-        <select id="location" name="location">
+        <label for ="requester">Username</label>
+        <input type="text" name="requester" required>
+
+        <label for="building">Building</label>
+        <select id="building" name="building">
             <option value="" selected="selected">Select Building</option>
-            <option value="Dunham">Dunham</option>
-            <option value="Stephens">Stephens</option>
-            <option value="Eckhart Hall">Eckhart Hall</option>
-        </select>
+            <option value="Dunham Hall">Dunham Hall</option>
+            <option value="Stephens Hall">Stephens Hall</option>
+            <option value="John C. Dunham Hall">John C. Dunham Hall</option>
+        </select><br><br>
 
         <label for="room">Room</label>
         <select id="room" name="room">
@@ -56,12 +63,10 @@
             <option value="107">107</option>
         </select><br><br>
 
-        <label for="proximity">In Or Near Room Selected</label>
-        <select id="proximity" name="proximity">
-            <option value="" selected="selected">Select Room Proximity</option>
-            <option value="1">in</option>
-            <option value="2">near</option>
-        </select>
+        <label for="subject">Subject</label>
+        <select id="subject" name="subject">
+            <option value="Electrical">Electrical</option>
+        </select><br><br>
 
         <label for="issue">Issue</label>
         <select id="issue" name="issue">
@@ -73,12 +78,12 @@
             <option value="Buzz">Loud buzzing sound coming from an outlet</option>
             <option Value="Other">Other, Please add description in comments section</option>
         </select><br><br>
+
         <p>Upload Image</p>
-        <form action="/action_page.php">
-            <input type="file" id="myFile" name="filename" accept="image/jpeg" maxlength="1784320">
-        </form>
-        <label for="comments">Comments</label><br>
-        <textarea id="comments" placeholder="250 characters" name="comments" rows="5" cols="50" maxlength="250"></textarea><br><br>
+        <input type="file" id="image" name="filename" accept="image/jpeg, image/png" maxlength="1784320">
+
+        <label for="note">Comments</label><br>
+        <textarea id="note" placeholder="250 characters" name="note" rows="5" cols="50" maxlength="250"></textarea><br><br>
 
         <input type="submit" value="Submit">
     </form>

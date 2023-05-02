@@ -24,7 +24,7 @@
 <nav>
     <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
-        <<li><a href="{% url 'issues' %}">Report</a></li>
+        <li><a href="{% url 'issues' %}">Report</a></li>
         <li><a href="{% url 'ticket' %}">Tickets</a></li>
         <li><a href="https://aurora.edu/">AU Home Page</a></li>
         <li style="float:right"><a class="active" href="{%  url 'login' %}">Log Out</a></li>
@@ -33,15 +33,19 @@
 <h1 style="text-align: center">Reporting Plumbing Issue</h1>
 
 <div class="container">
-    <form action="/action_page.php">
+    <form method="post" action="http://127.0.0.1:8000/system/create/" enctype="multipart/form-data">
+        {%  csrf_token %}
 
-        <label for="location">Location</label>
-        <select id="location" name="location">
-            <option value="emptyval" selected="selected">Select Building</option>
-            <option value="Dunham">Dunham</option>
-            <option value="Stephens">Stephens</option>
-            <option value="Eckhart Hall">Eckhart Hall</option>
-        </select>
+        <label for ="requester">Username</label>
+        <input type="text" name="requester" required>
+
+        <label for="building">Building</label>
+        <select id="building" name="building">
+            <option value="" selected="selected">Select Building</option>
+            <option value="Dunham Hall">Dunham Hall</option>
+            <option value="Stephens Hall">Stephens Hall</option>
+            <option value="John C. Dunham Hall">John C. Dunham Hall</option>
+        </select><br><br>
 
         <label for="room">Room</label>
         <select id="room" name="room">
@@ -55,12 +59,10 @@
             <option value="107">107</option>
         </select><br><br>
 
-        <label for="proximity">In Or Near Room Selected</label>
-        <select id="proximity" name="proximity">
-            <option value="" selected="selected">Select Proximity</option>
-            <option value="1">In room</option>
-            <option value="2">Near room</option>
-        </select>
+        <label for="subject">Subject</label>
+        <select id="subject" name="subject">
+            <option value="Plumbing">Plumbing</option>
+        </select><br><br>
 
         <label for="issue">Issue</label>
         <select id="issue" name="issue">
@@ -70,18 +72,18 @@
             <option value="Water leak">Water leak From Pipe</option>
             <option value="Sink">Sink Over Flowing</option>
             <option value="overflow">Toilet Or Urinal Over Flowing</option>
-            <option value="dirtywater">Dirty Water Coming Out</option>
+            <option value="dirty water">Dirty Water Coming Out</option>
             <option value="other">Other, Please Add Descriptive Issue In Comments Section</option>
         </select><br><br>
+
         <p>Upload Image</p>
-        <form action="/action_page.php">
-            <input type="file" id="myFile" name="filename" accept="image/jpeg" maxlength="1784320">
-        </form>
+        <input type="file" id="image" name="image" accept="image/jpeg, image/png" maxlength="1784320">
 
-        <label for="comments">Comments</label><br>
-        <textarea id="comments" name="comments" placeholder="250 characters" rows="5" cols="50" maxlength="250"></textarea><br><br>
 
-        <input type="submit" value="Submit">
+        <label for="note">Comments</label><br>
+        <textarea id="note" name="note" placeholder="250 characters" rows="5" cols="50" maxlength="250"></textarea><br><br>
+
+        <input type="submit" value="submit">
     </form>
 </div>
 
