@@ -13,7 +13,7 @@
   <ul>
       <li><a href="{% url 'home' %}">Home</a></li>
     <li><a href="{% url 'issues' %}">Report</a></li>
-    <li><a href="{% url 'ticket' %}">Tickets</a></li>
+    <li><a href="{% url 'ticket_view' %}">Tickets</a></li>
     <li><a href="https://aurora.edu/">AU Home Page</a></li>
     <li style="float:right"><a class="active" href="{%  url 'login' %}">Log Out</a></li>
   </ul>
@@ -21,38 +21,30 @@
 <h1 style="text-align: center">Tickets</h1>
 
 <table>
-  <tr>
+  <thead>
+    <tr>
       <th>Ticket ID</th>
-    <th>Summary</th>
-    <th>Date Created</th>
-    <th>Status</th>
-  </tr>
-  <tr>
-      <td>110</td>
-    <td>Water leak room:123 building: Dunham</td>
-    <td>04/02/2023</td>
-    <td>In Progress </td>
-  </tr>
-  <tr>
-      <td>99</td>
-    <td>Smart board not powering on room: 122 building: Dunham</td>
-    <td>03/02/2022</td>
-    <td>Completed</td>
-  </tr>
-  <tr>
-      <td>95</td>
-    <td>Mouse found room:132 building: Dunham</td>
-    <td>03/02/2022</td>
-    <td>Completed</td>
-  </tr>
-  <tr>
-      <td>80</td>
-    <td>No Heat room:234 building: Dunham</td>
-    <td>02/27/2022</td>
-    <td>Completed</td>
-  </tr>
-
+      <th>Location</th>
+      <th>Room</th>
+      <th>Subject</th>
+      <th>Issue</th>
+      <th>Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ticket in tickets %}
+    <tr>
+      <td>{{ ticket.id }}</td>
+      <td>{{ ticket.buildingName }}</td>
+      <td>{{ ticket.room }}</td>
+      <td>{{ ticket.subject }}</td>
+      <td>{{ ticket.issue }}</td>
+      <td>{{ ticket.description }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
+
 
 </body>
 </html>

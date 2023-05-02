@@ -19,7 +19,7 @@
   <a href="{% url 'create_ticket' %}" class="w3-bar-item w3-button" style="color: #00467F">Create Ticket</a>
   <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-right w3-text-white" style="background-color: #00467F">Logout</a>
 </div>
-<form method="post" action="http://127.0.0.1:8000/triage/create/">
+<form method="post" action="http://127.0.0.1:8000/triage/create/" enctype="multipart/form-data">
     {% csrf_token %}
     <!-- Sidebar -->
     <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
@@ -28,11 +28,11 @@
 
         <label class="w3-text-black"><b>Requester</b></label>
         <label for="requester">
-            <input class="w3-input w3-border" name="requester" type="text">
+            <input class="w3-input w3-border" name="requester" type="text" required>
         </label>
 
-        <label>Choose priority:
-            <select class="w3-select" name="priority">
+        <label class="w3-text-black"><b>Choose priority:</b>
+            <select class="w3-select" name="priority" required>
                 <option value="" disabled selected>Priority</option>
                 <option value="L">Low</option>
                 <option value="M">Medium</option>
@@ -40,14 +40,37 @@
             </select>
         </label>
 
-        <label>Choose building:
-            <select class="w3-select" name="building">
+        <label class="w3-text-black"><b>Choose building:</b>
+            <select class="w3-select" name="building" required>
                   <option value="" disabled selected>Location</option>
                   <option value="Dunham Hall">Dunham Hall</option>
                   <option value="Stephens Hall">Stephens Hall</option>
                   <option value="John C. Dunham Hall">John C. Dunham Hall</option>
             </select>
         </label>
+        <label for="room" class="w3-text-black"><b>Room</b></label>
+        <select id="room" name="room" required>
+            <option value="" selected="selected">Select Room Number</option>
+            <option value="101">101</option>
+            <option value="102">102</option>
+            <option value="103">103</option>
+            <option value="104">104</option>
+            <option value="105">105</option>
+            <option value="106">106</option>
+            <option value="107">107</option>
+        </select>
+
+        <label for="issue" class="w3-text-black"><b>Issue</b></label>
+        <select id="issue" name="issue" required>
+            <option value="">Select Issue</option>
+            <option value="Floor Drain">Floor Drain</option>
+            <option value="Water Fountain">Water Fountain Not Working</option>
+            <option value="Water leak">Water leak From Pipe</option>
+            <option value="Sink">Sink Over Flowing</option>
+            <option value="overflow">Toilet Or Urinal Over Flowing</option>
+            <option value="dirty water">Dirty Water Coming Out</option>
+            <option value="other">Other, Please Add Descriptive Issue In Comments Section</option>
+        </select>
     </div>
     <!-- Page Content -->
     <div style="margin-left:25%">
@@ -56,11 +79,16 @@
         </div>
         <div class="container">
             <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject" placeholder="Enter subject...">
+            <input minlength="1" maxlength="100" type="text" id="subject" name="subject" placeholder="Enter subject..." required>
+
             <label for="note">Note</label>
-            <textarea id="note" name="note" placeholder="Write note..." style="height:100px"></textarea>
+            <textarea minlength="1" maxlength="255" id="note" name="note" placeholder="Write note..." style="height:100px" required></textarea>
+
+            <label for="image">Choose Image (Optional):</label>
+            <input type="file" id="image" name="image" accept="image/png, image/jpeg">
+
             <label for="option">
-                <select class="w3-select" name="option">
+                <select class="w3-select" name="option" required>
                     <option value="" disabled selected>Choose your option</option>
                     <option value="S">Solved</option>
                     <option value="P">Pending</option>

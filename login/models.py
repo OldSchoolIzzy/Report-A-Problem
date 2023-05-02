@@ -5,5 +5,5 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class userRole(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    userRole = models.PositiveSmallIntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    roleStatus = models.IntegerField()
