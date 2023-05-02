@@ -66,6 +66,13 @@ def create_ticket_2(request):
         ticket.save()
         return redirect('http://127.0.0.1:8000/system/ticket')
 
+
+def ticket_view(request):
+    tickets = Ticket.objects.all()
+    return render(request, 'tickt.html', {'tickets': tickets})
+
+
+
 # def create_ticket(request):
 #     if request.method == 'POST':
 #         form = TicketForm(request.POST, request.FILES)

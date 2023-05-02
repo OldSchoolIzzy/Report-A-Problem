@@ -13,7 +13,7 @@
   <ul>
       <li><a href="{% url 'home' %}">Home</a></li>
     <li><a href="{% url 'issues' %}">Report</a></li>
-    <li><a href="{% url 'ticket' %}">Tickets</a></li>
+    <li><a href="{% url 'ticket_view' %}">Tickets</a></li>
     <li><a href="https://aurora.edu/">AU Home Page</a></li>
     <li style="float:right"><a class="active" href="{%  url 'login' %}">Log Out</a></li>
   </ul>
@@ -21,17 +21,30 @@
 <h1 style="text-align: center">Tickets</h1>
 
 <table>
-  <tr>
+  <thead>
+    <tr>
       <th>Ticket ID</th>
-    <th>Summary</th>
-    <th>Date Created</th>
-    <th>Status</th>
-  </tr>
-    
-
-
-
+      <th>Location</th>
+      <th>Room</th>
+      <th>Subject</th>
+      <th>Issue</th>
+      <th>Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ticket in tickets %}
+    <tr>
+      <td>{{ ticket.id }}</td>
+      <td>{{ ticket.buildingName }}</td>
+      <td>{{ ticket.room }}</td>
+      <td>{{ ticket.subject }}</td>
+      <td>{{ ticket.issue }}</td>
+      <td>{{ ticket.description }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
+
 
 </body>
 </html>
