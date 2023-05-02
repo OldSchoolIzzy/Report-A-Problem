@@ -26,7 +26,7 @@
             <input class="w3-input w3-border" name="requester" type="text" value="{{ ticket.username }}">
         </label>
 
-        <label for="priority">Choose priority:
+        <label for="priority"><b>Choose priority:</b>
         <select class="w3-select" name="priority">
             <option value="" disabled selected>Priority</option>
             <option value="L" {% if ticket.priority == "L" %}selected{% endif %}>Low</option>
@@ -34,7 +34,8 @@
             <option value="H" {% if ticket.priority == "H" %}selected{% endif %}>High</option>
         </select>
         </label>
-        <label for="building">Choose building:
+
+        <label for="building"><b>Choose building:</b>
         <select class="w3-select" name="building">
               <option value="" disabled selected>Location</option>
               <option value="Dunham Hall" {% if ticket.buildingName == "Dunham Hall" %}selected{% endif %}>
@@ -48,6 +49,30 @@
               </option>
         </select>
         </label>
+
+        <label for="room" class="w3-text-black"><b>Room</b></label>
+            <select id="room" name="room" required>
+                <option value="" disabled selected>Select Room Number</option>
+                <option value="101" {% if ticket.room == "101" %}selected{% endif %}>101</option>
+                <option value="102" {% if ticket.room == "102" %}selected{% endif %}>102</option>
+                <option value="103" {% if ticket.room == "103" %}selected{% endif %}>103</option>
+                <option value="104" {% if ticket.room == "104" %}selected{% endif %}>104</option>
+                <option value="105" {% if ticket.room == "105" %}selected{% endif %}>105</option>
+                <option value="106" {% if ticket.room == "106" %}selected{% endif %}>106</option>
+                <option value="107" {% if ticket.room == "107" %}selected{% endif %}>107</option>
+            </select>
+
+        <label for="issue" class="w3-text-black"><b>Issue</b></label>
+        <select id="issue" name="issue" required>
+            <option value="" disabled selected>Select Issue</option>
+            <option value="Floor Drain" {% if ticket.issue == "Floor Drain" %}selected{% endif %}>Floor Drain</option>
+            <option value="Water Fountain" {% if ticket.issue == "Water Fountain" %}selected{% endif %}>Water Fountain Not Working</option>
+            <option value="Water leak" {% if ticket.issue == "Water leak" %}selected{% endif %}>Water leak From Pipe</option>
+            <option value="Sink" {% if ticket.issue == "Sink" %}selected{% endif %}>Sink Over Flowing</option>
+            <option value="overflow" {% if ticket.issue == "overflow" %}selected{% endif %}>Toilet Or Urinal Over Flowing</option>
+            <option value="dirty water" {% if ticket.issue == "dirty water" %}selected{% endif %}>Dirty Water Coming Out</option>
+            <option value="other" {% if ticket.issue == "Other" %}selected{% endif %}>Other, Please Add Descriptive Issue In Comments Section</option>
+        </select>
     </div>
     <!-- Page Content -->
     <div style="margin-left:25%">
@@ -56,7 +81,7 @@
         </div>
         <div class="container">
 
-                <label for="subject">Subject</label>
+            <label for="subject"><b>Subject</b></label>
                 <input type="text" id="subject" name="subject" value="{{ ticket.subject }}">
 
                 <div class="w3-bar w3-text-white" style="background-color: #00467F">
