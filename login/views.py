@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import Group
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
@@ -10,6 +11,7 @@ from django.contrib import messages
 
 from django.contrib import messages
 
+from .decorator import unauthenticated_user, allowed_users
 from .forms import CreateUserForm
 
 from django.contrib.auth import authenticate, login, logout
@@ -19,7 +21,6 @@ from .models import userRole
 
 def registerPage(request):
     form = CreateUserForm()
-
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
@@ -29,10 +30,17 @@ def registerPage(request):
             messages.success(request, "Account was created for " + username)
             user = User.objects.get(username=username)
             user_data = userRole.objects.create(user=user, roleStatus=type)
+            maint_group, created = Group.objects.get_or_create(name="Maintenance")
+            users_group, created = Group.objects.get_or_create(name="users")
+            if type == '0':
+                user.groups.add(maint_group)
+            elif type == '1':
+                user.groups.add(users_group)
             user_data.save()
-            return redirect('login')
+            return redirect('/login')
     context = {'form': form}
     return render(request, 'register.html', context)
+
 
 
 def loginPage(request):
@@ -40,15 +48,10 @@ def loginPage(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-        suser = User.objects.get(username=username)
-        roleID = userRole.objects.filter(user_id=suser.id).values().last()
 
-        if user is not None and suser.id == 2:
+        if user is not None:
             login(request, user)
-            return redirect('/triage')
-        elif user is not None:
-            login(request, user)
-            return redirect('home')
+            return redirect(home)
         else:
             messages.info(request, "Username or Password is incorrect")
 
@@ -58,10 +61,14 @@ def loginPage(request):
 
 def logoutUser(request):
     logout(request)
-    return redirect('loginPage')
+    return redirect('/login')
 
 
 @login_required(login_url='/login')
+@allowed_users(allowed_roles=['users'])
 def home(request):
     context = {}
-    return render(request, 'homepage.html', context)
+    return redirect('/system')
+    ##return render(request, "homepage.html", context)
+
+

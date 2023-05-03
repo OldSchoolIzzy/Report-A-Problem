@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 class CreateUserForm(UserCreationForm):
     Choices = [
-        (0, 'Maintenance'),(1, 'User')
+        (0, 'Maintenance'), (1, 'User')
     ]
     type = forms.ChoiceField(widget=forms.RadioSelect, choices=Choices)
 
